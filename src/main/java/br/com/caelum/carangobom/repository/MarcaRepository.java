@@ -11,6 +11,8 @@ import java.util.Optional;
 
 @Repository
 public class MarcaRepository {
+	
+	
 
     private EntityManager em;
 
@@ -29,7 +31,7 @@ public class MarcaRepository {
     }
 
     public Optional<Marca> findById(Long id) {
-        return Optional.ofNullable(em.find(Marca.class, id));
+    	return Optional.ofNullable(em.find(Marca.class, id));
     }
 
     public List<Marca> findAllByOrderByNome() {
