@@ -1,5 +1,7 @@
-package br.com.caelum.carangobom.marca;
+package br.com.caelum.carangobom.controller;
 
+import br.com.caelum.carangobom.domain.Marca;
+import br.com.caelum.carangobom.repository.MarcaRepository;
 import br.com.caelum.carangobom.validacao.ErroDeParametroOutputDto;
 import br.com.caelum.carangobom.validacao.ListaDeErrosOutputDto;
 import org.springframework.beans.factory.annotation.Autowired;

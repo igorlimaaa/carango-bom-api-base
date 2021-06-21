@@ -1,4 +1,4 @@
-package br.com.caelum.carangobom.marca;
+package br.com.caelum.carangobom.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -7,6 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import br.com.caelum.carangobom.controller.MarcaController;
+import br.com.caelum.carangobom.domain.Marca;
+import br.com.caelum.carangobom.repository.MarcaRepository;
+
 import java.util.List;
 import java.util.Optional;
 
