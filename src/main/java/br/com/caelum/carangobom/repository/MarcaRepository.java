@@ -1,6 +1,7 @@
 package br.com.caelum.carangobom.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.support.JpaRepositoryFactory;
 import org.springframework.stereotype.Repository;
 
 import br.com.caelum.carangobom.domain.Marca;
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class MarcaRepository {
+public class MarcaRepository extends PagingAndSortingRepository{
 
     private EntityManager em;
 

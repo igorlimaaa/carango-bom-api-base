@@ -1,4 +1,4 @@
-package br.com.caelum.carangobom.app;
+package br.com.caelum.carangobom;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
