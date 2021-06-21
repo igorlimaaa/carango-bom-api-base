@@ -24,20 +24,15 @@ import br.com.caelum.carangobom.validacao.ListaDeErrosOutputDto;
 public class MarcaServiceImpl implements MarcaService {
 
 	@Autowired
-	private MarcaRepository mr;
-
-    @Autowired
-    public MarcaServiceImpl(MarcaRepository mr) {
-    	this.mr = mr;
-    }
+	private MarcaRepository marcaRepository;
     
 
     @Override
     public ResponseEntity<Marca> removeBrand(Long id) {
-    	Optional<Marca> m1 = mr.findById(id);
+    	Optional<Marca> m1 = marcaRepository.findById(id.intValue());
         if (m1.isPresent()) {
             Marca m2 = m1.get();
-            mr.delete(m2);
+            marcaRepository.delete(m2);
             return ResponseEntity.ok(m2);
         } else {
             return ResponseEntity.notFound().build();
@@ -47,7 +42,7 @@ public class MarcaServiceImpl implements MarcaService {
     
 	@Override
 	public ResponseEntity<Marca> saveBrand(Marca m1, UriComponentsBuilder uriBuilder) {
-		 Marca m2 = mr.save(m1);
+		 Marca m2 = marcaRepository.save(m1);
 	     URI h = uriBuilder.path("/marcas/{id}").buildAndExpand(m1.getId()).toUri();
 	     return ResponseEntity.created(h).body(m2);
 	}
@@ -55,7 +50,7 @@ public class MarcaServiceImpl implements MarcaService {
 	
 	@Override
 	public ResponseEntity<Marca> findByIdBrand(Long id) {
-		Optional<Marca> m1 = mr.findById(id);
+		Optional<Marca> m1 = marcaRepository.findById(id.intValue());
         if (m1.isPresent()) {
             return ResponseEntity.ok(m1.get());
         } else {
@@ -66,13 +61,16 @@ public class MarcaServiceImpl implements MarcaService {
 
 	@Override
 	public List<Marca> findAllByOrderByNomeBrand() {
-		return mr.findAllByOrderByNome();
+		
+		//Customizar consulta no repository
+		//TODO IAL
+		return marcaRepository.findByIdOrderNome();
 	}
 	
 	
 	@Override
 	public ResponseEntity<Marca> updateBrand(Long id, @Valid Marca m1) {
-		Optional<Marca> m2 = mr.findById(id);
+		Optional<Marca> m2 = marcaRepository.findById(id.intValue());
         if (m2.isPresent()) {
             Marca m3 = m2.get();
             m3.setNome(m1.getNome());
