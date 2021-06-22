@@ -10,11 +10,11 @@ public class TokenForm {
 		this.tipo = tipo;
 	}
 
-	private String getToken() {
+	public String getToken() {
 		return token;
 	}
 
-	private String getTipo() {
+	public String getTipo() {
 		return tipo;
 	}
 	
