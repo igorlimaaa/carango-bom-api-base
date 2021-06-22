@@ -29,7 +29,7 @@ public class MarcaServiceImpl implements MarcaService {
 
     @Override
     public ResponseEntity<Marca> removeBrand(Long id) {
-    	Optional<Marca> m1 = marcaRepository.findById(id.intValue());
+    	Optional<Marca> m1 = marcaRepository.findById(id);
         if (m1.isPresent()) {
             Marca m2 = m1.get();
             marcaRepository.delete(m2);
@@ -50,7 +50,7 @@ public class MarcaServiceImpl implements MarcaService {
 	
 	@Override
 	public ResponseEntity<Marca> findByIdBrand(Long id) {
-		Optional<Marca> m1 = marcaRepository.findById(id.intValue());
+		Optional<Marca> m1 = marcaRepository.findById(id);
         if (m1.isPresent()) {
             return ResponseEntity.ok(m1.get());
         } else {
@@ -70,7 +70,7 @@ public class MarcaServiceImpl implements MarcaService {
 	
 	@Override
 	public ResponseEntity<Marca> updateBrand(Long id, @Valid Marca m1) {
-		Optional<Marca> m2 = marcaRepository.findById(id.intValue());
+		Optional<Marca> m2 = marcaRepository.findById(id);
         if (m2.isPresent()) {
             Marca m3 = m2.get();
             m3.setNome(m1.getNome());
