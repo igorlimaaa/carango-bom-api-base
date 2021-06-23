@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -25,9 +26,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 	
 	@Override
 	public ResponseEntity<Usuario> saveUsuario(@Valid Usuario u1, UriComponentsBuilder uriBuilder) {
-		 Usuario u2 = userRepository.save(u1);
-	     URI h = uriBuilder.path("/usuario/{id}").buildAndExpand(u1.getId()).toUri();
-	     return ResponseEntity.created(h).body(u2);
+		u1.setSenha(new BCryptPasswordEncoder().encode(u1.getSenha()));
+		Usuario u2 = userRepository.save(u1);
+		URI h = uriBuilder.path("/usuario/{id}").buildAndExpand(u1.getId()).toUri();
+		return ResponseEntity.created(h).body(u2);
 	}
 	
 	@Override
