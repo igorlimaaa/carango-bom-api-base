@@ -10,7 +10,6 @@ import org.springframework.data.jpa.repository.Query;
 
 import br.com.caelum.carangobom.domain.Marca;
 
-
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan("br.com.caelum.carangobom.repository")
