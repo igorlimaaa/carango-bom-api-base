@@ -1,6 +1,7 @@
 package br.com.caelum.carangobom.config.security;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -46,9 +47,11 @@ public class AuthenticationToken extends OncePerRequestFilter{
 
 	private void authenClient(String token) {
 		Long idUsuario = tokenService.getIdUsuario(token);
-		Usuario usuario = repository.findById(idUsuario).get();
-		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
-		SecurityContextHolder.getContext().setAuthentication(authentication);
+		Optional<Usuario> usuario = repository.findById(idUsuario);
+		if(usuario.isPresent()) {
+			UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(usuario.get(), null, usuario.get().getAuthorities());			
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+		}
 	}
 
 
