@@ -61,9 +61,6 @@ public class MarcaServiceImpl implements MarcaService {
 
 	@Override
 	public List<Marca> findAllByOrderByNomeBrand() {
-		
-		//Customizar consulta no repository
-		//TODO IAL
 		return marcaRepository.findByIdOrderNome();
 	}
 	

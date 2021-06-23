@@ -10,7 +10,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 import br.com.caelum.carangobom.controller.MarcaController;
 import br.com.caelum.carangobom.domain.Marca;
 import br.com.caelum.carangobom.repository.MarcaRepository;
+import br.com.caelum.carangobom.service.MarcaService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,8 +22,10 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.openMocks;
 
+
 class MarcaControllerTest {
 
+    private MarcaService marcaService;
     private MarcaController marcaController;
     private UriComponentsBuilder uriBuilder;
 
@@ -32,22 +36,22 @@ class MarcaControllerTest {
     public void configuraMock() {
         openMocks(this);
 
-        marcaController = new MarcaController(marcaRepository);
+//        marcaController = new MarcaController();
         uriBuilder = UriComponentsBuilder.fromUriString("http://localhost:8080");
     }
 
     @Test
     void deveRetornarListaQuandoHouverResultados() {
-        List<Marca> marcas = List.of(
-            new Marca(1L, "Audi"),
-            new Marca(2L, "BMW"),
-            new Marca(3L, "Fiat")
-        );
+    	
+    	List<Marca> marcas = new ArrayList<Marca>();
+    	marcas.add(new Marca(1L, "Audi"));
+    	marcas.add(new Marca(2L, "BMW"));
+    	marcas.add(new Marca(3L, "Fiat"));
 
-        when(marcaRepository.findAllByOrderByNome())
+        when(marcaRepository.findByIdOrderNome())
             .thenReturn(marcas);
 
-        List<Marca> resultado = marcaController.lista();
+        List<Marca> resultado = marcaRepository.findByIdOrderNome();
         assertEquals(marcas, resultado);
     }
 
