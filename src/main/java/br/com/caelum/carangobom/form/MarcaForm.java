@@ -37,5 +37,19 @@ public class MarcaForm {
 		
 		return listaType;
 	}
+	
+	public Marca convertTypeToDomain(MarcaForm marcaType) {
+		Marca marcaDomain = new Marca();
+		marcaDomain.setId(null);
+		marcaDomain.setNome(marcaType.getNome());
+		return marcaDomain;
+	}
+	
+	public MarcaForm convertDomainToType(Marca marcaDomain) {
+		MarcaForm marcaType = new MarcaForm();
+		marcaType.setId(marcaDomain.getId());
+		marcaType.setNome(marcaDomain.getNome());
+		return marcaType;
+	}
 
 }

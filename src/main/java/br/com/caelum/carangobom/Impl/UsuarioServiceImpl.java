@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import br.com.caelum.carangobom.domain.Usuario;
+import br.com.caelum.carangobom.form.UsuarioForm;
 import br.com.caelum.carangobom.repository.UsuarioRepository;
 import br.com.caelum.carangobom.service.UsuarioService;
 import br.com.caelum.carangobom.validacao.ErroDeParametroOutputDto;
@@ -20,10 +21,14 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Autowired
 	private UsuarioRepository userRepository;
 	
+	@Autowired
+	private UsuarioForm usuarioForm;
+	
 	@Override
-	public Usuario saveUsuario(Usuario usuarioType) {
+	public UsuarioForm saveUsuario(UsuarioForm usuarioType) {
 		usuarioType.setSenha(new BCryptPasswordEncoder().encode(usuarioType.getSenha()));
-		return userRepository.save(usuarioType);
+		Usuario usuarioSave = userRepository.save(usuarioForm.convertDtoToDomain(usuarioType)); 
+		return usuarioForm.convertDomainToDto(usuarioSave);
 	}
 	
 	@Override

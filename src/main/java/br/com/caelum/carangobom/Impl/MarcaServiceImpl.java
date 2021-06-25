@@ -43,8 +43,9 @@ public class MarcaServiceImpl implements MarcaService {
     
     
 	@Override
-	public Marca saveBrand(Marca marca) {
-		 return marcaRepository.save(marca);
+	public MarcaForm saveBrand(MarcaForm marcaType) {
+		Marca marcaSave = marcaRepository.save(marcaForm.convertTypeToDomain(marcaType));
+		return marcaForm.convertDomainToType(marcaSave);
 	}
 	
 	
@@ -67,12 +68,12 @@ public class MarcaServiceImpl implements MarcaService {
 	
 	
 	@Override
-	public Marca updateBrand(Long id,Marca marcaType) {
+	public MarcaForm updateBrand(Long id,MarcaForm marcaType) {
 		Optional<Marca> marcaDomain = marcaRepository.findById(id);
         if (marcaDomain.isPresent() && marcaType.getNome() != null) {
             Marca marcaSave = marcaDomain.get();
         	marcaSave.setNome(marcaType.getNome());
-            return marcaRepository.saveAndFlush(marcaSave);
+            return marcaForm.convertDomainToType(marcaRepository.saveAndFlush(marcaSave));
         } else {
             throw new ObjectNotFoundException(id, IDENTIFICADOR_NOT_FOUND);
         }

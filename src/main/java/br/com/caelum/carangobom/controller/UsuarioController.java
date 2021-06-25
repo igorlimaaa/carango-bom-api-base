@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.caelum.carangobom.domain.Usuario;
+import br.com.caelum.carangobom.form.UsuarioForm;
 import br.com.caelum.carangobom.service.UsuarioService;
 import br.com.caelum.carangobom.validacao.ListaDeErrosOutputDto;
 
@@ -38,8 +39,8 @@ public class UsuarioController {
 	@PostMapping("/usuario")
     @ResponseBody
     @Transactional
-    public ResponseEntity<Usuario> cadastraUsuario(@Valid @RequestBody Usuario usuario) {
-    	return new ResponseEntity<Usuario>(usuarioService.saveUsuario(usuario), null, HttpStatus.OK);
+    public ResponseEntity<UsuarioForm> cadastraUsuario(@Valid @RequestBody UsuarioForm usuario) {
+    	return new ResponseEntity<UsuarioForm>(usuarioService.saveUsuario(usuario), null, HttpStatus.OK);
     }
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
