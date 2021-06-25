@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -36,7 +37,7 @@ public class MarcaController {
     @GetMapping("/marcas")
     @ResponseBody
     @Transactional
-    //@Cacheable(value = "listaMarcas")
+    @Cacheable(value = "listaMarcas")
     public ResponseEntity<List<MarcaForm>> lista() {
         return new ResponseEntity<List<MarcaForm>>(marcaService.findAllByOrderByNomeBrand(), null, HttpStatus.OK);
     }
