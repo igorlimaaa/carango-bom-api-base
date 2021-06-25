@@ -14,9 +14,9 @@ public interface MarcaService {
 
 	public Marca removeBrand(Long id);
     
-    public Marca updateBrand(Long id, Marca m1);
+    public MarcaForm updateBrand(Long id, MarcaForm m1);
 
-    public Marca saveBrand(Marca m1);
+    public MarcaForm saveBrand(MarcaForm m1);
 
     public Marca findByIdBrand(Long id);
 

@@ -54,16 +54,16 @@ public class MarcaController {
     @ResponseBody
     @Transactional
     @CacheEvict(value = "listaMarcas", allEntries = true)
-    public ResponseEntity<Marca> cadastra(@Valid @RequestBody Marca marca) {
-    	return new ResponseEntity<Marca>(marcaService.saveBrand(marca), HttpStatus.OK);
+    public ResponseEntity<MarcaForm> cadastra(@Valid @RequestBody MarcaForm marca) {
+    	return new ResponseEntity<MarcaForm>(marcaService.saveBrand(marca), HttpStatus.OK);
     }
 
     @PutMapping("/marcas/{id}")
     @ResponseBody
     @Transactional
     @CacheEvict(value = "listaMarcas", allEntries = true)
-    public ResponseEntity<Marca> altera(@PathVariable Long id, @Valid @RequestBody Marca m1) throws ObjectNotFoundException{
-    	return new ResponseEntity<Marca>(marcaService.updateBrand(id, m1), null, HttpStatus.OK);
+    public ResponseEntity<MarcaForm> altera(@PathVariable Long id, @Valid @RequestBody MarcaForm m1) throws ObjectNotFoundException{
+    	return new ResponseEntity<MarcaForm>(marcaService.updateBrand(id, m1), null, HttpStatus.OK);
     }
 
     @DeleteMapping("/marcas/{id}")
