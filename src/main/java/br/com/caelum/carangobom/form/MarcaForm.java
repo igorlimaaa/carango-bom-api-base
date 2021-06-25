@@ -27,7 +27,7 @@ public class MarcaForm {
 	}	
 	
 	public List<MarcaForm> convertDomainToDto(List<Marca> marca) {
-		List<MarcaForm> listaType = new ArrayList<MarcaForm>();
+		List<MarcaForm> listaType = new ArrayList<>();
 		marca.forEach(marcaDomain -> {
 			MarcaForm marcaType = new MarcaForm();
 			marcaType.setId(marcaDomain.getId());
