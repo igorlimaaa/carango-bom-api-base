@@ -1,19 +1,17 @@
-package br.com.caelum.carangobom.serviceImpl;
+package br.com.caelum.carangobom.Impl;
 
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.util.UriComponentsBuilder;
+
 import br.com.caelum.carangobom.domain.Marca;
+import br.com.caelum.carangobom.form.MarcaForm;
 import br.com.caelum.carangobom.repository.MarcaRepository;
 import br.com.caelum.carangobom.service.MarcaService;
 import br.com.caelum.carangobom.validacao.ErroDeParametroOutputDto;
@@ -25,55 +23,59 @@ public class MarcaServiceImpl implements MarcaService {
 
 	@Autowired
 	private MarcaRepository marcaRepository;
-    
+	
+	@Autowired
+	private MarcaForm marcaForm;
 
     @Override
-    public ResponseEntity<Marca> removeBrand(Long id) {
+    public Marca removeBrand(Long id) {
     	Optional<Marca> m1 = marcaRepository.findById(id);
         if (m1.isPresent()) {
             Marca m2 = m1.get();
             marcaRepository.delete(m2);
-            return ResponseEntity.ok(m2);
+            return m2;
         } else {
-            return ResponseEntity.notFound().build();
+            throw new ObjectNotFoundException(id, "Identificador não encontrado");
         }
     }
     
     
 	@Override
-	public ResponseEntity<Marca> saveBrand(Marca m1, UriComponentsBuilder uriBuilder) {
+	public Marca saveBrand(Marca m1) {
 		 Marca m2 = marcaRepository.save(m1);
-	     URI h = uriBuilder.path("/marcas/{id}").buildAndExpand(m1.getId()).toUri();
-	     return ResponseEntity.created(h).body(m2);
+	     //URI h = uriBuilder.path("/marcas/{id}").buildAndExpand(m1.getId()).toUri();
+	     return m2;
 	}
 	
 	
 	@Override
-	public ResponseEntity<Marca> findByIdBrand(Long id) {
+	public Marca findByIdBrand(Long id) {
 		Optional<Marca> m1 = marcaRepository.findById(id);
         if (m1.isPresent()) {
-            return ResponseEntity.ok(m1.get());
+            return m1.get();
         } else {
-            return ResponseEntity.notFound().build();
+            throw new ObjectNotFoundException(id, "Identificador não encontrado");
         }
 	}
 
 
 	@Override
-	public List<Marca> findAllByOrderByNomeBrand() {
-		return marcaRepository.findByIdOrderNome();
+	public List<MarcaForm> findAllByOrderByNomeBrand() {
+		List<Marca> listMarca = marcaRepository.findByIdOrderNome();
+		return marcaForm.convertDomainToDto(listMarca);
 	}
 	
 	
 	@Override
-	public ResponseEntity<Marca> updateBrand(Long id, @Valid Marca m1) {
-		Optional<Marca> m2 = marcaRepository.findById(id);
-        if (m2.isPresent()) {
-            Marca m3 = m2.get();
-            m3.setNome(m1.getNome());
-            return ResponseEntity.ok(m3);
+	public Marca updateBrand(Long id,Marca marcaType) {
+		Optional<Marca> marcaDomain = marcaRepository.findById(id);
+        if (marcaDomain.isPresent() && marcaType.getNome() != null) {
+            Marca marcaSave = marcaDomain.get();
+        	marcaSave.setNome(marcaType.getNome());
+            marcaSave = marcaRepository.saveAndFlush(marcaSave);
+            return marcaSave;
         } else {
-            return ResponseEntity.notFound().build();
+            throw new ObjectNotFoundException(id, "Identificador não encontrado");
         }
 	}
 	

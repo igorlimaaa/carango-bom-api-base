@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import br.com.caelum.carangobom.domain.Marca;
 import br.com.caelum.carangobom.domain.Usuario;
 
 @Configuration
