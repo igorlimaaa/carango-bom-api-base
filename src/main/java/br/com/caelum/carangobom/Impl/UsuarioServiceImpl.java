@@ -1,17 +1,13 @@
-package br.com.caelum.carangobom.serviceImpl;
+package br.com.caelum.carangobom.Impl;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.util.UriComponentsBuilder;
+
 import br.com.caelum.carangobom.domain.Usuario;
 import br.com.caelum.carangobom.repository.UsuarioRepository;
 import br.com.caelum.carangobom.service.UsuarioService;
@@ -25,11 +21,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 	private UsuarioRepository userRepository;
 	
 	@Override
-	public ResponseEntity<Usuario> saveUsuario(@Valid Usuario u1, UriComponentsBuilder uriBuilder) {
-		u1.setSenha(new BCryptPasswordEncoder().encode(u1.getSenha()));
-		Usuario u2 = userRepository.save(u1);
-		URI h = uriBuilder.path("/usuario/{id}").buildAndExpand(u1.getId()).toUri();
-		return ResponseEntity.created(h).body(u2);
+	public Usuario saveUsuario(Usuario usuarioType) {
+		usuarioType.setSenha(new BCryptPasswordEncoder().encode(usuarioType.getSenha()));
+		return userRepository.save(usuarioType);
 	}
 	
 	@Override
@@ -49,7 +43,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public List<Usuario> findAllByOrderByNomeBrand() {
-		return userRepository.findByIdOrderNome();
+		List<Usuario> listUsuario = userRepository.findByIdOrderNome();
+		listUsuario.forEach(listaUsuario -> listaUsuario.setSenha(null));
+		return listUsuario;
 	}
 	
 }

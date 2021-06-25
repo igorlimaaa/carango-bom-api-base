@@ -4,12 +4,15 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -19,9 +22,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.caelum.carangobom.domain.Marca;
+import br.com.caelum.carangobom.form.MarcaForm;
 import br.com.caelum.carangobom.service.MarcaService;
 import br.com.caelum.carangobom.validacao.ListaDeErrosOutputDto;
 
@@ -29,21 +32,21 @@ import br.com.caelum.carangobom.validacao.ListaDeErrosOutputDto;
 public class MarcaController {
 	
 	@Autowired
-	private MarcaService mpl;
+	private MarcaService marcaService;
 
     @GetMapping("/marcas")
     @ResponseBody
     @Transactional
     @Cacheable(value = "listaMarcas")
-    public List<Marca> lista() {
-        return mpl.findAllByOrderByNomeBrand();
+    public ResponseEntity<List<MarcaForm>> lista() {
+        return new ResponseEntity<List<MarcaForm>>(marcaService.findAllByOrderByNomeBrand(), null, HttpStatus.OK);
     }
 
     @GetMapping("/marcas/{id}")
     @ResponseBody
     @Transactional
-    public ResponseEntity<Marca> id(@PathVariable Long id) {
-        return mpl.findByIdBrand(id);
+    public ResponseEntity<Marca> id(@PathVariable Long id) throws ObjectNotFoundException{
+        return new ResponseEntity<Marca>(marcaService.findByIdBrand(id), null, HttpStatus.OK);
     }
     
 
@@ -51,30 +54,32 @@ public class MarcaController {
     @ResponseBody
     @Transactional
     @CacheEvict(value = "listaMarcas", allEntries = true)
-    public ResponseEntity<Marca> cadastra(@Valid @RequestBody Marca marca, UriComponentsBuilder uriBuilder) {
-    	return mpl.saveBrand(marca, uriBuilder);
+    public ResponseEntity<Marca> cadastra(@Valid @RequestBody Marca marca) {
+    	return new ResponseEntity<Marca>(marcaService.saveBrand(marca), HttpStatus.OK);
     }
 
     @PutMapping("/marcas/{id}")
     @ResponseBody
     @Transactional
-    public ResponseEntity<Marca> altera(@PathVariable Long id, @Valid @RequestBody Marca m1) {
-    	return mpl.updateBrand(id, m1);
+    @CacheEvict(value = "listaMarcas", allEntries = true)
+    public ResponseEntity<Marca> altera(@PathVariable Long id, @Valid @RequestBody Marca m1) throws ObjectNotFoundException{
+    	return new ResponseEntity<Marca>(marcaService.updateBrand(id, m1), null, HttpStatus.OK);
     }
 
     @DeleteMapping("/marcas/{id}")
     @ResponseBody
     @Transactional
-    public ResponseEntity<Marca> deleta(@PathVariable Long id) {
-    	return mpl.removeBrand(id);
+    @Validated
+    @CacheEvict(value = "listaMarcas", allEntries = true)
+    public ResponseEntity<Marca> deleta(@PathVariable Long id) throws ObjectNotFoundException {
+    	return new ResponseEntity<Marca>(marcaService.removeBrand(id), null, HttpStatus.OK);
         
     }
 
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody
     public ListaDeErrosOutputDto validacao(MethodArgumentNotValidException excecao) {
-        return mpl.validacao(excecao);
+        return marcaService.validacao(excecao);
     }
     
 }
