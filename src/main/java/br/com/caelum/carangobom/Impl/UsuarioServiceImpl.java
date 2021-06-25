@@ -23,8 +23,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public Usuario saveUsuario(Usuario usuarioType) {
 		usuarioType.setSenha(new BCryptPasswordEncoder().encode(usuarioType.getSenha()));
-		Usuario usuarioDomain = userRepository.save(usuarioType);
-		return usuarioDomain;
+		return userRepository.save(usuarioType);
 	}
 	
 	@Override

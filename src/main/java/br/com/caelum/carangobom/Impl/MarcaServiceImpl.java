@@ -26,6 +26,8 @@ public class MarcaServiceImpl implements MarcaService {
 	
 	@Autowired
 	private MarcaForm marcaForm;
+	
+	private String IDENTIFICADOR_NOT_FOUND = "Identificador não encontrado";
 
     @Override
     public Marca removeBrand(Long id) {
@@ -35,16 +37,14 @@ public class MarcaServiceImpl implements MarcaService {
             marcaRepository.delete(m2);
             return m2;
         } else {
-            throw new ObjectNotFoundException(id, "Identificador não encontrado");
+            throw new ObjectNotFoundException(id, IDENTIFICADOR_NOT_FOUND);
         }
     }
     
     
 	@Override
-	public Marca saveBrand(Marca m1) {
-		 Marca m2 = marcaRepository.save(m1);
-	     //URI h = uriBuilder.path("/marcas/{id}").buildAndExpand(m1.getId()).toUri();
-	     return m2;
+	public Marca saveBrand(Marca marca) {
+		 return marcaRepository.save(marca);
 	}
 	
 	
@@ -54,7 +54,7 @@ public class MarcaServiceImpl implements MarcaService {
         if (m1.isPresent()) {
             return m1.get();
         } else {
-            throw new ObjectNotFoundException(id, "Identificador não encontrado");
+            throw new ObjectNotFoundException(id, IDENTIFICADOR_NOT_FOUND);
         }
 	}
 
@@ -72,10 +72,9 @@ public class MarcaServiceImpl implements MarcaService {
         if (marcaDomain.isPresent() && marcaType.getNome() != null) {
             Marca marcaSave = marcaDomain.get();
         	marcaSave.setNome(marcaType.getNome());
-            marcaSave = marcaRepository.saveAndFlush(marcaSave);
-            return marcaSave;
+            return marcaRepository.saveAndFlush(marcaSave);
         } else {
-            throw new ObjectNotFoundException(id, "Identificador não encontrado");
+            throw new ObjectNotFoundException(id, IDENTIFICADOR_NOT_FOUND);
         }
 	}
 	
