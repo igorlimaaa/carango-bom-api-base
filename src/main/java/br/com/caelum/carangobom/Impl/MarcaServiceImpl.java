@@ -27,7 +27,7 @@ public class MarcaServiceImpl implements MarcaService {
 	@Autowired
 	private MarcaForm marcaForm;
 	
-	private String IDENTIFICADOR_NOT_FOUND = "Identificador não encontrado";
+	private static final String IDENTIFICADOR_NOT_FOUND = "Identificador não encontrado";
 
     @Override
     public Marca removeBrand(Long id) {
