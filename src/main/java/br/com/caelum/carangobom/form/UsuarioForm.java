@@ -7,51 +7,58 @@ import br.com.caelum.carangobom.domain.Usuario;
 @Component
 public class UsuarioForm {
 	
-	private Long id;
-	private String nome;
-	private String email;
-	private String senha;
+	private Long id_usuario;
+	private String ds_nome;
+	private String ds_email;
+	private String ds_senha;
 	
-	public Long getId() {
-		return id;
+	public Long getId_usuario() {
+		return id_usuario;
 	}
-	public void setId(Long id) {
-		this.id = id;
+
+	public void setId_usuario(Long id_usuario) {
+		this.id_usuario = id_usuario;
 	}
-	public String getNome() {
-		return nome;
+
+	public String getDs_nome() {
+		return ds_nome;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+
+	public void setDs_nome(String ds_nome) {
+		this.ds_nome = ds_nome;
 	}
-	public String getEmail() {
-		return email;
+
+	public String getDs_email() {
+		return ds_email;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+
+	public void setDs_email(String ds_email) {
+		this.ds_email = ds_email;
 	}
-	public String getSenha() {
-		return senha;
+
+	public String getDs_senha() {
+		return ds_senha;
 	}
-	public void setSenha(String senha) {
-		this.senha = senha;
+
+	public void setDs_senha(String ds_senha) {
+		this.ds_senha = ds_senha;
 	}
-	
+
 	public Usuario convertDtoToDomain(UsuarioForm usuarioDto) {
 		Usuario usuarioDomain = new Usuario();
-		usuarioDomain.setId(usuarioDto.getId());
-		usuarioDomain.setEmail(usuarioDto.getEmail());
-		usuarioDomain.setNome(usuarioDto.getNome());
-		usuarioDomain.setSenha(usuarioDto.getSenha());
+		usuarioDomain.setId(usuarioDto.getId_usuario());
+		usuarioDomain.setEmail(usuarioDto.getDs_email());
+		usuarioDomain.setNome(usuarioDto.getDs_nome());
+		usuarioDomain.setSenha(usuarioDto.getDs_senha());
 		return usuarioDomain;
 	}
 	
 	public UsuarioForm convertDomainToDto (Usuario usuarioDomain) {
 		UsuarioForm usuarioDto = new UsuarioForm();
-		usuarioDto.setId(usuarioDomain.getId());
-		usuarioDto.setEmail(usuarioDomain.getEmail());
-		usuarioDto.setNome(usuarioDomain.getNome());
-		usuarioDto.setSenha(usuarioDomain.getSenha());
+		usuarioDto.setId_usuario(usuarioDomain.getId());
+		usuarioDto.setDs_email(usuarioDomain.getEmail());
+		usuarioDto.setDs_nome(usuarioDomain.getNome());
+		usuarioDto.setDs_senha(usuarioDomain.getSenha());
 		return usuarioDto;
 	}
 
