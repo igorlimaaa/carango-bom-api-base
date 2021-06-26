@@ -1,4 +1,4 @@
-package br.com.caelum.carangobom.Impl;
+package br.com.caelum.carangobom.impl;
 
 
 import java.util.ArrayList;

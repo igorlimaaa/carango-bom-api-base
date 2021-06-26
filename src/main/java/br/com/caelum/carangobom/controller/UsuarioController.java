@@ -40,7 +40,7 @@ public class UsuarioController {
     @ResponseBody
     @Transactional
     public ResponseEntity<UsuarioForm> cadastraUsuario(@Valid @RequestBody UsuarioForm usuario) {
-    	return new ResponseEntity<UsuarioForm>(usuarioService.saveUsuario(usuario), null, HttpStatus.OK);
+    	return new ResponseEntity<>(usuarioService.saveUsuario(usuario), null, HttpStatus.OK);
     }
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
