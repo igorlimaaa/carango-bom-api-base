@@ -1,0 +1,3 @@
+INSERT INTO MARCA (nome) VALUES ('Audi');
+INSERT INTO MARCA (nome) VALUES ('For');
+INSERT INTO MARCA (nome) VALUES ('HyndaI');

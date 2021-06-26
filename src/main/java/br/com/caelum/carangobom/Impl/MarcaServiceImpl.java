@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -26,8 +25,6 @@ public class MarcaServiceImpl implements MarcaService {
 	
 	@Autowired
 	private MarcaForm marcaForm;
-	
-	private static final String IDENTIFICADOR_NOT_FOUND = "Identificador não encontrado";
 
     @Override
     public Marca removeBrand(Long id) {
@@ -37,7 +34,7 @@ public class MarcaServiceImpl implements MarcaService {
             marcaRepository.delete(m2);
             return m2;
         } else {
-            throw new ObjectNotFoundException(id, IDENTIFICADOR_NOT_FOUND);
+            return null;
         }
     }
     
@@ -55,7 +52,7 @@ public class MarcaServiceImpl implements MarcaService {
         if (m1.isPresent()) {
             return m1.get();
         } else {
-            throw new ObjectNotFoundException(id, IDENTIFICADOR_NOT_FOUND);
+            return null;
         }
 	}
 
@@ -75,7 +72,7 @@ public class MarcaServiceImpl implements MarcaService {
         	marcaSave.setNome(marcaType.getNome());
             return marcaForm.convertDomainToType(marcaRepository.saveAndFlush(marcaSave));
         } else {
-            throw new ObjectNotFoundException(id, IDENTIFICADOR_NOT_FOUND);
+            return null;
         }
 	}
 	
