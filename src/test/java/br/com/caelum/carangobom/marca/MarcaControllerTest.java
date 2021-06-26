@@ -44,7 +44,7 @@ class MarcaControllerTest {
     
     private MarcaForm createMarcaForm(String nome) {
         MarcaForm nova = new MarcaForm();
-        nova.setNome(nome);
+        nova.setDs_nome(nome);
         return nova;
     }
 
@@ -88,7 +88,7 @@ class MarcaControllerTest {
         ResponseEntity<MarcaForm> resposta = marcaController.altera(1L, nova);
         assertEquals(HttpStatus.OK, resposta.getStatusCode());
         MarcaForm marcaAlterada = resposta.getBody();
-        assertEquals("NOVA Audi", marcaAlterada.getNome());
+        assertEquals("NOVA Audi", marcaAlterada.getDs_nome());
     }
 
     @Test

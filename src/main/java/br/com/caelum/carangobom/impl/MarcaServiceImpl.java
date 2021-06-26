@@ -67,9 +67,9 @@ public class MarcaServiceImpl implements MarcaService {
 	@Override
 	public MarcaForm updateBrand(Long id,MarcaForm marcaType) {
 		Optional<Marca> marcaDomain = marcaRepository.findById(id);
-        if (marcaDomain.isPresent() && marcaType.getNome() != null) {
+        if (marcaDomain.isPresent() && marcaType.getDs_nome() != null) {
             Marca marcaSave = marcaDomain.get();
-        	marcaSave.setNome(marcaType.getNome());
+        	marcaSave.setNome(marcaType.getDs_nome());
             return marcaForm.convertDomainToType(marcaRepository.saveAndFlush(marcaSave));
         } else {
             return null;
