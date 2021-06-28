@@ -1,3 +1,3 @@
-INSERT INTO MARCA (nome) VALUES ('Audi');
-INSERT INTO MARCA (nome) VALUES ('For');
-INSERT INTO MARCA (nome) VALUES ('HyndaI');
+INSERT INTO TB_MARCA (ds_nome) VALUES ('Audi');
+INSERT INTO TB_MARCA (ds_nome) VALUES ('For');
+INSERT INTO TB_MARCA (ds_nome) VALUES ('HyndaI');

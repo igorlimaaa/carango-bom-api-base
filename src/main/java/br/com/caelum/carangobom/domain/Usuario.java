@@ -30,35 +30,35 @@ public class Usuario implements UserDetails {
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Perfil> perfis = new ArrayList<>();
 	
-	public Long getId_usuario() {
+	public Long getId() {
 		return id_usuario;
 	}
 
-	public void setId_usuario(Long id_usuario) {
+	public void setId(Long id_usuario) {
 		this.id_usuario = id_usuario;
 	}
 
-	public String getDs_nome() {
+	public String getNome() {
 		return ds_nome;
 	}
 
-	public void setDs_nome(String ds_nome) {
+	public void setNome(String ds_nome) {
 		this.ds_nome = ds_nome;
 	}
 
-	public String getDs_email() {
+	public String getEmail() {
 		return ds_email;
 	}
 
-	public void setDs_email(String ds_email) {
+	public void setEmail(String ds_email) {
 		this.ds_email = ds_email;
 	}
 
-	public String getDs_senha() {
+	public String getSenha() {
 		return ds_senha;
 	}
 
-	public void setDs_senha(String ds_senha) {
+	public void setSenha(String ds_senha) {
 		this.ds_senha = ds_senha;
 	}
 

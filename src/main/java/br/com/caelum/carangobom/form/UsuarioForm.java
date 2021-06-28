@@ -49,19 +49,19 @@ public class UsuarioForm {
 
 	public Usuario convertDtoToDomain(UsuarioForm usuarioDto) {
 		Usuario usuarioDomain = new Usuario();
-		usuarioDomain.setId_usuario(usuarioDto.getId());
-		usuarioDomain.setDs_email(usuarioDto.getEmail());
-		usuarioDomain.setDs_nome(usuarioDto.getNome());
-		usuarioDomain.setDs_senha(usuarioDto.getSenha());
+		usuarioDomain.setId(usuarioDto.getId());
+		usuarioDomain.setEmail(usuarioDto.getEmail());
+		usuarioDomain.setNome(usuarioDto.getNome());
+		usuarioDomain.setSenha(usuarioDto.getSenha());
 		return usuarioDomain;
 	}
 	
 	public UsuarioForm convertDomainToDto (Usuario usuarioDomain) {
 		UsuarioForm usuarioDto = new UsuarioForm();
-		usuarioDto.setId(usuarioDomain.getId_usuario());
-		usuarioDto.setEmail(usuarioDomain.getDs_email());
-		usuarioDto.setNome(usuarioDomain.getDs_nome());
-		usuarioDto.setSenha(usuarioDomain.getDs_senha());
+		usuarioDto.setId(usuarioDomain.getId());
+		usuarioDto.setEmail(usuarioDomain.getEmail());
+		usuarioDto.setNome(usuarioDomain.getNome());
+		usuarioDto.setSenha(usuarioDomain.getSenha());
 		return usuarioDto;
 	}
 	
@@ -69,9 +69,9 @@ public class UsuarioForm {
 		List<UsuarioForm> listDto = new ArrayList<>();
 		listDomain.forEach(userDomain -> {
 			UsuarioForm user = new UsuarioForm();
-			user.setId(userDomain.getId_usuario());
-			user.setNome(userDomain.getDs_nome());
-			user.setEmail(userDomain.getDs_email());
+			user.setId(userDomain.getId());
+			user.setNome(userDomain.getNome());
+			user.setEmail(userDomain.getEmail());
 			listDto.add(user);
 		});
 		return listDto;
