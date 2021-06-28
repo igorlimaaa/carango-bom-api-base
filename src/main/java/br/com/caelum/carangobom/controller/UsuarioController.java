@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.com.caelum.carangobom.domain.Usuario;
 import br.com.caelum.carangobom.form.UsuarioForm;
 import br.com.caelum.carangobom.service.UsuarioService;
 import br.com.caelum.carangobom.validacao.ListaDeErrosOutputDto;
@@ -34,7 +33,8 @@ public class UsuarioController {
 	@GetMapping("/usuario")
     @ResponseBody
     @Transactional
-    public List<Usuario> lista() {
+    public List<UsuarioForm> lista() {
+		//TODO IAL: colocar paginacao para ordenar automaticamente.
         return usuarioService.findAllByOrderByNomeBrand();
     }
 	

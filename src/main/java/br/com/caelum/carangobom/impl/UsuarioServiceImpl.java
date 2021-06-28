@@ -27,7 +27,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	
 	@Override
 	public UsuarioForm saveUsuario(UsuarioForm usuarioType) {
-		usuarioType.setDs_senha(new BCryptPasswordEncoder().encode(usuarioType.getDs_senha()));
+		usuarioType.setSenha(new BCryptPasswordEncoder().encode(usuarioType.getSenha()));
 		Usuario usuarioSave = userRepository.save(usuarioForm.convertDtoToDomain(usuarioType)); 
 		return usuarioForm.convertDomainToDto(usuarioSave);
 	}
@@ -48,10 +48,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public List<Usuario> findAllByOrderByNomeBrand() {
+	public List<UsuarioForm> findAllByOrderByNomeBrand() {
 		List<Usuario> listUsuario = userRepository.findByIdOrderNome();
-		listUsuario.forEach(listaUsuario -> listaUsuario.setSenha(null));
-		return listUsuario;
+		List<UsuarioForm> listUsuarioType = usuarioForm.convertListDomainToDto(listUsuario);
+		return listUsuarioType;
 	}
 
 	@Override

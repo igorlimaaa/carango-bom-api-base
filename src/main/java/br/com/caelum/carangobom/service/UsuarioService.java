@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
-import br.com.caelum.carangobom.domain.Usuario;
 import br.com.caelum.carangobom.form.UsuarioForm;
 import br.com.caelum.carangobom.validacao.ListaDeErrosOutputDto;
 
@@ -15,7 +14,7 @@ public interface UsuarioService {
 	
 	public UsuarioForm saveUsuario(UsuarioForm u1);
 	
-	public List<Usuario> findAllByOrderByNomeBrand();
+	public List<UsuarioForm> findAllByOrderByNomeBrand();
 	
 	public ListaDeErrosOutputDto validacaoUsuario(MethodArgumentNotValidException excecao);
 	
