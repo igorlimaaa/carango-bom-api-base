@@ -36,9 +36,11 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
   sonarcloud:
-    runs-on: ubuntu-latest && matrix.java == '11'
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+
+    - if: matrix.os == ubuntu-latest && matrix.java == '11'
+      uses: actions/checkout@v2
       with:
         # Disabling shallow clone is recommended for improving relevancy of reporting
         fetch-depth: 0
