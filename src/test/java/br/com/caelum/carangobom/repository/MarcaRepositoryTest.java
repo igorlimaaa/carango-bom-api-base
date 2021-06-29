@@ -12,19 +12,19 @@ import org.springframework.test.context.ActiveProfiles;
 
 import br.com.caelum.carangobom.domain.Marca;
 
-@SpringBootTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@ActiveProfiles("test")
-public class MarcaRepositoryTest {
-	
-	@Autowired
-	private MarcaRepository marcaRepository;
-	
-	@Test
-	public void deveRetornarListaMarcas() {
-		List<Marca> listMarca = marcaRepository.findByIdOrderNome();
-		boolean result = listMarca != null && !listMarca.isEmpty() ? true : false;
-		assertTrue(result);
-	}
-
-}
+//@SpringBootTest
+//@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+//@ActiveProfiles("test")
+//public class MarcaRepositoryTest {
+//	
+//	@Autowired
+//	private MarcaRepository marcaRepository;
+//	
+//	@Test
+//	public void deveRetornarListaMarcas() {
+//		List<Marca> listMarca = marcaRepository.findByIdOrderNome();
+//		boolean result = listMarca != null && !listMarca.isEmpty() ? true : false;
+//		assertTrue(result);
+//	}
+//
+//}
