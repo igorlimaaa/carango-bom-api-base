@@ -38,7 +38,6 @@ jobs:
   sonarcloud:
     runs-on: ubuntu-latest
     steps:
-
     - if: matrix.os == ubuntu-latest && matrix.java == '11'
       uses: actions/checkout@v2
       with:
