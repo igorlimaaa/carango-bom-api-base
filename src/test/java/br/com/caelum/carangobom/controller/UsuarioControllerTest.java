@@ -1,6 +1,6 @@
 package br.com.caelum.carangobom.controller;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.net.URI;
