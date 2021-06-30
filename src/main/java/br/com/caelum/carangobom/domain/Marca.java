@@ -10,15 +10,15 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "marca")
+@Table(name = "tb_marca")
 public class Marca {
 
     @Id @GeneratedValue(strategy = IDENTITY)
-    private Long id;
+    private Long id_marca;
 
     @NotBlank
     @Size(min = 2, message = "Deve ter {min} ou mais caracteres.")
-    private String nome;
+    private String ds_nome;
 
     public Marca() {
 
@@ -29,23 +29,25 @@ public class Marca {
     }
 
     public Marca(Long id, String nome) {
-        this.id = id;
-        this.nome = nome;
+        this.id_marca = id;
+        this.ds_nome = nome;
     }
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id_marca;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id_marca) {
+		this.id_marca = id_marca;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public String getNome() {
+		return ds_nome;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public void setNome(String ds_nome) {
+		this.ds_nome = ds_nome;
+	}
+
+    
 }

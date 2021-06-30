@@ -10,31 +10,31 @@ import br.com.caelum.carangobom.domain.Marca;
 @Component
 public class MarcaForm {
 	
-	private Long id_marca;
-	private String ds_nome;
-	
-	public Long getId_marca() {
-		return id_marca;
+	private Long id;
+	private String nome;
+
+	public Long getId() {
+		return id;
 	}
 
-	public void setId_marca(Long id_marca) {
-		this.id_marca = id_marca;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public String getDs_nome() {
-		return ds_nome;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setDs_nome(String ds_nome) {
-		this.ds_nome = ds_nome;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public List<MarcaForm> convertDomainToDto(List<Marca> marca) {
 		List<MarcaForm> listaType = new ArrayList<>();
 		marca.forEach(marcaDomain -> {
 			MarcaForm marcaType = new MarcaForm();
-			marcaType.setId_marca(marcaDomain.getId());
-			marcaType.setDs_nome(marcaDomain.getNome());
+			marcaType.setId(marcaDomain.getId());
+			marcaType.setNome(marcaDomain.getNome());
 			listaType.add(marcaType);
 		});
 		
@@ -44,14 +44,14 @@ public class MarcaForm {
 	public Marca convertTypeToDomain(MarcaForm marcaType) {
 		Marca marcaDomain = new Marca();
 		marcaDomain.setId(null);
-		marcaDomain.setNome(marcaType.getDs_nome());
+		marcaDomain.setNome(marcaType.getNome());
 		return marcaDomain;
 	}
 	
 	public MarcaForm convertDomainToType(Marca marcaDomain) {
 		MarcaForm marcaType = new MarcaForm();
-		marcaType.setId_marca(marcaDomain.getId());
-		marcaType.setDs_nome(marcaDomain.getNome());
+		marcaType.setId(marcaDomain.getId());
+		marcaType.setNome(marcaDomain.getNome());
 		return marcaType;
 	}
 

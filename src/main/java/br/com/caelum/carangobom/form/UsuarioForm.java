@@ -1,5 +1,8 @@
 package br.com.caelum.carangobom.form;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import br.com.caelum.carangobom.domain.Usuario;
@@ -7,59 +10,71 @@ import br.com.caelum.carangobom.domain.Usuario;
 @Component
 public class UsuarioForm {
 	
-	private Long id_usuario;
-	private String ds_nome;
-	private String ds_email;
-	private String ds_senha;
+	private Long id;
+	private String nome;
+	private String email;
+	private String senha;
 	
-	public Long getId_usuario() {
-		return id_usuario;
+	public Long getId() {
+		return id;
 	}
 
-	public void setId_usuario(Long id_usuario) {
-		this.id_usuario = id_usuario;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public String getDs_nome() {
-		return ds_nome;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setDs_nome(String ds_nome) {
-		this.ds_nome = ds_nome;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public String getDs_email() {
-		return ds_email;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setDs_email(String ds_email) {
-		this.ds_email = ds_email;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public String getDs_senha() {
-		return ds_senha;
+	public String getSenha() {
+		return senha;
 	}
 
-	public void setDs_senha(String ds_senha) {
-		this.ds_senha = ds_senha;
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public Usuario convertDtoToDomain(UsuarioForm usuarioDto) {
 		Usuario usuarioDomain = new Usuario();
-		usuarioDomain.setId(usuarioDto.getId_usuario());
-		usuarioDomain.setEmail(usuarioDto.getDs_email());
-		usuarioDomain.setNome(usuarioDto.getDs_nome());
-		usuarioDomain.setSenha(usuarioDto.getDs_senha());
+		usuarioDomain.setId(usuarioDto.getId());
+		usuarioDomain.setEmail(usuarioDto.getEmail());
+		usuarioDomain.setNome(usuarioDto.getNome());
+		usuarioDomain.setSenha(usuarioDto.getSenha());
 		return usuarioDomain;
 	}
 	
 	public UsuarioForm convertDomainToDto (Usuario usuarioDomain) {
 		UsuarioForm usuarioDto = new UsuarioForm();
-		usuarioDto.setId_usuario(usuarioDomain.getId());
-		usuarioDto.setDs_email(usuarioDomain.getEmail());
-		usuarioDto.setDs_nome(usuarioDomain.getNome());
-		usuarioDto.setDs_senha(usuarioDomain.getSenha());
+		usuarioDto.setId(usuarioDomain.getId());
+		usuarioDto.setEmail(usuarioDomain.getEmail());
+		usuarioDto.setNome(usuarioDomain.getNome());
+		usuarioDto.setSenha(usuarioDomain.getSenha());
 		return usuarioDto;
+	}
+	
+	public List<UsuarioForm> convertListDomainToDto (List<Usuario> listDomain){
+		List<UsuarioForm> listDto = new ArrayList<>();
+		listDomain.forEach(userDomain -> {
+			UsuarioForm user = new UsuarioForm();
+			user.setId(userDomain.getId());
+			user.setNome(userDomain.getNome());
+			user.setEmail(userDomain.getEmail());
+			listDto.add(user);
+		});
+		return listDto;
 	}
 
 }

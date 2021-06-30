@@ -16,75 +16,62 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-@Table(name = "usuario")
+@Table(name = "tb_usuario")
 public class Usuario implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	private String nome;
-	private String email;
-	private String senha;
+	private Long id_usuario;
+	private String ds_nome;
+	private String ds_email;
+	private String ds_senha;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Perfil> perfis = new ArrayList<>();
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Usuario other = (Usuario) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
-
+	
 	public Long getId() {
-		return id;
+		return id_usuario;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setId(Long id_usuario) {
+		this.id_usuario = id_usuario;
 	}
 
 	public String getNome() {
-		return nome;
+		return ds_nome;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNome(String ds_nome) {
+		this.ds_nome = ds_nome;
 	}
 
 	public String getEmail() {
-		return email;
+		return ds_email;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmail(String ds_email) {
+		this.ds_email = ds_email;
 	}
 
 	public String getSenha() {
-		return senha;
+		return ds_senha;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setSenha(String ds_senha) {
+		this.ds_senha = ds_senha;
+	}
+
+	public List<Perfil> getPerfis() {
+		return perfis;
+	}
+
+	public void setPerfis(List<Perfil> perfis) {
+		this.perfis = perfis;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override
@@ -94,12 +81,12 @@ public class Usuario implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		return this.senha;
+		return this.ds_senha;
 	}
 
 	@Override
 	public String getUsername() {
-		return this.email;
+		return this.ds_email;
 	}
 
 	@Override

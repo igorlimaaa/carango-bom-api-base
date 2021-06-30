@@ -87,8 +87,8 @@ public class VeiculoForm {
 				veiculoType.setIsVendido(veiculoDomain.getIsVendido());
 				
 				MarcaForm marca = new MarcaForm();
-				marca.setId_marca(veiculoDomain.getMarca().getId());
-				marca.setDs_nome(veiculoDomain.getMarca().getNome());
+				marca.setId(veiculoDomain.getMarca().getId());
+				marca.setNome(veiculoDomain.getMarca().getNome());
 				veiculoType.setMarca(marca);
 			
 				listaType.add(veiculoType);
@@ -107,7 +107,7 @@ public class VeiculoForm {
 			veiculoDomain.setIsVendido(veiculoType.getIsVendido());
 			
 			Marca marca = new Marca();
-			marca.setId(veiculoType.getMarca().getId_marca());
+			marca.setId(veiculoType.getMarca().getId());
 			veiculoDomain.setMarca(marca);
 			
 			return veiculoDomain;
@@ -122,8 +122,8 @@ public class VeiculoForm {
 			veiculoType.setIsVendido(veiculoDomain.getIsVendido());
 			
 			MarcaForm marca = new MarcaForm();
-			marca.setId_marca(veiculoDomain.getMarca().getId());
-			marca.setDs_nome(veiculoDomain.getMarca().getNome());
+			marca.setId(veiculoDomain.getMarca().getId());
+			marca.setNome(veiculoDomain.getMarca().getNome());
 			veiculoType.setMarca(marca);
 		
 			return veiculoType;

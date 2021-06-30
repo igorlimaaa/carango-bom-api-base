@@ -1,4 +1,4 @@
-package br.com.caelum.carangobom.marca;
+package br.com.caelum.carangobom.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -17,7 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 
-import br.com.caelum.carangobom.controller.MarcaController;
 import br.com.caelum.carangobom.domain.Marca;
 import br.com.caelum.carangobom.form.MarcaForm;
 import br.com.caelum.carangobom.repository.MarcaRepository;
@@ -44,7 +43,7 @@ class MarcaControllerTest {
     
     private MarcaForm createMarcaForm(String nome) {
         MarcaForm nova = new MarcaForm();
-        nova.setDs_nome(nome);
+        nova.setNome(nome);
         return nova;
     }
 
@@ -88,7 +87,7 @@ class MarcaControllerTest {
         ResponseEntity<MarcaForm> resposta = marcaController.altera(1L, nova);
         assertEquals(HttpStatus.OK, resposta.getStatusCode());
         MarcaForm marcaAlterada = resposta.getBody();
-        assertEquals("NOVA Audi", marcaAlterada.getDs_nome());
+        assertEquals("NOVA Audi", marcaAlterada.getNome());
     }
 
     @Test
