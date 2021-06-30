@@ -22,7 +22,6 @@
 		<sonar.organization>igorlimaaa</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<sonar.moduleKey>{project.artifactId}:{project.artifactId}</sonar.moduleKey>
-		<sonar.login>6b1d5c56d1820404e93a9eff777c6a6e1e6cfe78</sonar.login>
 	</properties>
 
 
