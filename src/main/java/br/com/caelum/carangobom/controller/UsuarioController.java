@@ -49,8 +49,8 @@ public class UsuarioController {
 	@ResponseBody
 	@Transactional
 	@Validated
-	public ResponseEntity<Usuario> deleta(@PathVariable Long id) {
-		Usuario usuario = usuarioService.removeUser(id);
+	public ResponseEntity<UsuarioForm> deleta(@PathVariable Long id) {
+		UsuarioForm usuario = usuarioService.removeUser(id);
 		if (usuario != null) {
 			return new ResponseEntity<>(usuario, null, HttpStatus.OK);
 		}else {

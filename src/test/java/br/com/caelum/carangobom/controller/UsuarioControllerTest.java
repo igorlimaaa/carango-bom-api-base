@@ -30,7 +30,7 @@ class UsuarioControllerTest {
 	@Test
 	void deveCadastrarUsuario() throws Exception {
 		URI uri = new URI("/usuario");
-		String json = "{\"ds_nome\": \"Igor de Almeida Lima\", \"ds_email\": \"almeidalima.igor@gmail.com\", \"ds_senha\": \"123456\"}";
+		String json = "{\"nome\": \"Igor de Almeida Lima\", \"email\": \"almeidalima.igor@gmail.com\", \"senha\": \"123456\"}";
 		
 		mockMvc.perform(MockMvcRequestBuilders.post(uri).content(json).contentType(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().is(201));
 		

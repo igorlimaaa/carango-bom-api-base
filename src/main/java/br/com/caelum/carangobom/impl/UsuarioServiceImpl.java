@@ -55,12 +55,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public Usuario removeUser(Long id) {
+	public UsuarioForm removeUser(Long id) {
 		Optional<Usuario> u1 = userRepository.findById(id);
         if (u1.isPresent()) {
         	Usuario u2 = u1.get();
             userRepository.delete(u2);
-            return u2;
+            return usuarioForm.convertDomainToDto(u2);
         } else {
             return null;
         }

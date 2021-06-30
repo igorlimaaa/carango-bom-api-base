@@ -18,5 +18,5 @@ public interface UsuarioService {
 	
 	public ListaDeErrosOutputDto validacaoUsuario(MethodArgumentNotValidException excecao);
 	
-	public Usuario removeUser(Long id);
+	public UsuarioForm removeUser(Long id);
 }
