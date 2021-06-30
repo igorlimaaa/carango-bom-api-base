@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,7 @@ import br.com.caelum.carangobom.service.MarcaService;
 import br.com.caelum.carangobom.validacao.ListaDeErrosOutputDto;
 
 @Controller
+@CrossOrigin(origins = "http://localhost:3000")
 public class MarcaController {
 	
 	@Autowired
