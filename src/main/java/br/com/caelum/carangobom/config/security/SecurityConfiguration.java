@@ -49,10 +49,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.antMatchers(HttpMethod.POST, "/usuario").permitAll()
 			.antMatchers(HttpMethod.POST, "/auth").permitAll()
 			.antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
+			
+			
 			.anyRequest().authenticated()
-			.and().cors().and().csrf().disable()
+			.and().csrf().disable()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and().addFilterBefore(new AuthenticationToken(tokenService, usuarioRepository), UsernamePasswordAuthenticationFilter.class);
+		
 	}
 	
 	@Override

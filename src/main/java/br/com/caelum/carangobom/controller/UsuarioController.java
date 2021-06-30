@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,7 @@ import br.com.caelum.carangobom.service.UsuarioService;
 import br.com.caelum.carangobom.validacao.ListaDeErrosOutputDto;
 
 @Controller
+@CrossOrigin(origins = "http://localhost:3000")
 public class UsuarioController {
 
 	@Autowired
