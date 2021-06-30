@@ -20,7 +20,9 @@ public class VeiculoForm {
 	    
 	    private Double preco;
 	    
-	    private Marca marca;
+	    private boolean isVendido; 
+	    
+	    private MarcaForm marca;
 
 		
 	    public Long getId() {
@@ -56,11 +58,20 @@ public class VeiculoForm {
 			this.preco = preco;
 		}
 		
-		public Marca getMarca() {
+		
+		public boolean getIsVendido() {
+			return isVendido;
+		}
+
+		public void setIsVendido(boolean isVendido) {
+			this.isVendido = isVendido;
+		}
+		
+		public MarcaForm getMarca() {
 			return marca;
 		}
 
-		public void setMarca(Marca marca) {
+		public void setMarca(MarcaForm marca) {
 			this.marca = marca;
 		}
 		
@@ -73,8 +84,14 @@ public class VeiculoForm {
 				veiculoType.setAno(veiculoDomain.getAno());
 				veiculoType.setModelo(veiculoDomain.getModelo());
 				veiculoType.setPreco(veiculoDomain.getPreco());
-				veiculoType.setMarca(veiculoDomain.getMarca());
+				veiculoType.setIsVendido(veiculoDomain.getIsVendido());
+				
+				MarcaForm marca = new MarcaForm();
+				marca.setId_marca(veiculoDomain.getMarca().getId());
+				marca.setDs_nome(veiculoDomain.getMarca().getNome());
+				veiculoType.setMarca(marca);
 			
+				listaType.add(veiculoType);
 				
 			});
 			
@@ -87,7 +104,11 @@ public class VeiculoForm {
 			veiculoDomain.setAno(veiculoType.getAno());
 			veiculoDomain.setModelo(veiculoType.getModelo());
 			veiculoDomain.setPreco(veiculoType.getPreco());
-			veiculoDomain.setMarca(veiculoDomain.getMarca());
+			veiculoDomain.setIsVendido(veiculoType.getIsVendido());
+			
+			Marca marca = new Marca();
+			marca.setId(veiculoType.getMarca().getId_marca());
+			veiculoDomain.setMarca(marca);
 			
 			return veiculoDomain;
 		}
@@ -98,7 +119,12 @@ public class VeiculoForm {
 			veiculoType.setAno(veiculoDomain.getAno());
 			veiculoType.setModelo(veiculoDomain.getModelo());
 			veiculoType.setPreco(veiculoDomain.getPreco());
-			veiculoType.setMarca(veiculoDomain.getMarca());
+			veiculoType.setIsVendido(veiculoDomain.getIsVendido());
+			
+			MarcaForm marca = new MarcaForm();
+			marca.setId_marca(veiculoDomain.getMarca().getId());
+			marca.setDs_nome(veiculoDomain.getMarca().getNome());
+			veiculoType.setMarca(marca);
 		
 			return veiculoType;
 		}

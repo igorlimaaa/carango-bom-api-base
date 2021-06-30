@@ -2,6 +2,7 @@ package br.com.caelum.carangobom.domain;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -28,6 +29,9 @@ public class Veiculo {
     @NotNull
     private Double preco;
     
+    @Column(columnDefinition="boolean default true")
+    private boolean isVendido;
+    
     @ManyToOne()
     @JoinColumn(name="marca_id", nullable = false)
     private Marca marca;
@@ -37,11 +41,12 @@ public class Veiculo {
 
     }
 
-    public Veiculo(Long id, Long ano ,String modelo, Double preco, Marca marca) {
+    public Veiculo(Long id, Long ano ,String modelo, Double preco, boolean isVendido, Marca marca) {
         this.id = id;
         this.ano = ano;
         this.modelo = modelo;
         this.preco = preco;
+        this.isVendido = isVendido;
         this.marca = marca;
         
     }
@@ -78,6 +83,14 @@ public class Veiculo {
     public void setPreco(Double preco) {
         this.preco = preco;
     }
+    
+    public boolean getIsVendido() {
+		return isVendido;
+	}
+
+	public void setIsVendido(boolean isVendido) {
+		this.isVendido = isVendido;
+	}
     
     public Marca getMarca() {
 		return marca;

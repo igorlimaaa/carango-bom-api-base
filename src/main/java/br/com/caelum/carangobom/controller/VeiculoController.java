@@ -10,7 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,6 +37,25 @@ public class VeiculoController {
     public ResponseEntity<List<VeiculoForm>> lista() {
         return new ResponseEntity<>(veiculoService.findAllByOrderByNomeVeiculo(), null, HttpStatus.OK);
     }
+	
+	@GetMapping("/veiculo/{id}")
+    @ResponseBody
+    @Transactional
+    public ResponseEntity<VeiculoForm> id(@PathVariable Long id){
+		VeiculoForm veiculoForm = veiculoService.findByIdVeiculo(id);
+    	if(veiculoForm != null) {
+    		return new ResponseEntity<>(veiculoForm, null, HttpStatus.OK);
+    	}else {
+    		return new ResponseEntity<>(veiculoForm, null, HttpStatus.NOT_FOUND);    		
+    	}
+    }
+	
+	@GetMapping("/veiculo/vendido")
+    @ResponseBody
+    @Transactional
+    public ResponseEntity<List<VeiculoForm>> vedido(){
+		 return new ResponseEntity<>(veiculoService.findAllVendido(), null, HttpStatus.OK);
+    }
 
 
 	@PostMapping("/veiculo")
@@ -55,6 +76,21 @@ public class VeiculoController {
     		return new ResponseEntity<>(veiculo, null, HttpStatus.NOT_FOUND);    		
     	}
     }
+    
+    
+    @DeleteMapping("/veiculo/{id}")
+	@ResponseBody
+	@Transactional
+	@Validated
+	public ResponseEntity<VeiculoForm> deleta(@PathVariable Long id) {
+    	VeiculoForm veiculo = veiculoService.removeVeiculo(id);
+		if (veiculo != null) {
+			return new ResponseEntity<VeiculoForm>(veiculo, null, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<VeiculoForm>(veiculo, null, HttpStatus.NOT_FOUND);			
+		}
+
+	}
     
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody

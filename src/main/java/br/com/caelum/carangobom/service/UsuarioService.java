@@ -18,4 +18,6 @@ public interface UsuarioService {
 	public List<Usuario> findAllByOrderByNomeBrand();
 	
 	public ListaDeErrosOutputDto validacaoUsuario(MethodArgumentNotValidException excecao);
+	
+	public Usuario removeUser(Long id);
 }

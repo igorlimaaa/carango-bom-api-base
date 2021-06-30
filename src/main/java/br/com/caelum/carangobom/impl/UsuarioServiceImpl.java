@@ -2,6 +2,7 @@ package br.com.caelum.carangobom.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -51,6 +52,18 @@ public class UsuarioServiceImpl implements UsuarioService {
 		List<Usuario> listUsuario = userRepository.findByIdOrderNome();
 		listUsuario.forEach(listaUsuario -> listaUsuario.setSenha(null));
 		return listUsuario;
+	}
+
+	@Override
+	public Usuario removeUser(Long id) {
+		Optional<Usuario> u1 = userRepository.findById(id);
+        if (u1.isPresent()) {
+        	Usuario u2 = u1.get();
+            userRepository.delete(u2);
+            return u2;
+        } else {
+            return null;
+        }
 	}
 	
 }

@@ -13,11 +13,17 @@ import br.com.caelum.carangobom.validacao.ListaDeErrosOutputDto;
 public interface VeiculoService {
 
     public VeiculoForm updateVeiculo(Long id, VeiculoForm veiculoForm);
+    
+    public VeiculoForm removeVeiculo(Long id);
 
     public VeiculoForm saveVeiculo(VeiculoForm veiculoForm );
     
     public ListaDeErrosOutputDto validacao(MethodArgumentNotValidException excecao);
     
     public List<VeiculoForm> findAllByOrderByNomeVeiculo();
+    
+    public VeiculoForm findByIdVeiculo(Long id);
+    
+    public List<VeiculoForm> findAllVendido();
 
 }

@@ -65,5 +65,36 @@ public class VeiculoServiceImpl implements VeiculoService {
 		List<Veiculo> listMarca = veiculoRepository.findByIdOrderModeloVeiculo();
 		return veiculoForm.convertDomainToDto(listMarca);
 	}
+
+
+	@Override
+	public VeiculoForm findByIdVeiculo(Long id) {
+		Optional<Veiculo> m1 = veiculoRepository.findById(id);
+        if (m1.isPresent()) {
+            return veiculoForm.convertDomainToType(m1.get());
+        } else {
+            return null;
+        }
+	}
+
+
+	@Override
+	public VeiculoForm removeVeiculo(Long id) {
+		Optional<Veiculo> m1 = veiculoRepository.findById(id);
+        if (m1.isPresent()) {
+        	Veiculo m2 = m1.get();
+            veiculoRepository.delete(m2);
+            return veiculoForm.convertDomainToType(m2);
+        } else {
+            return null;
+        }
+	}
+
+
+	@Override
+	public List<VeiculoForm> findAllVendido() {
+		List<Veiculo> listMarcaVendido = veiculoRepository.findByIdVedido();
+		return veiculoForm.convertDomainToDto(listMarcaVendido);
+	}
 }
 
