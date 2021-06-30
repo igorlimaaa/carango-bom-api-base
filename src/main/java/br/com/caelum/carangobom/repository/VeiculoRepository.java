@@ -20,5 +20,4 @@ public interface VeiculoRepository extends JpaRepository<Veiculo, Long>{
 	
 	@Query(value = "SELECT v.* FROM veiculo v where is_vendido = false", nativeQuery = true)
 	List<Veiculo> findByIdVedido();
-		
 }
