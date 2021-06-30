@@ -27,13 +27,13 @@ class UsuarioControllerTest {
 	@Autowired
 	private MockMvc mockMvc;
 
-	@Test
-	void deveCadastrarUsuario() throws Exception {
-		URI uri = new URI("/usuario");
-		String json = "{\"nome\": \"Igor de Almeida Lima\", \"email\": \"almeidalima.igor@gmail.com\", \"senha\": \"123456\"}";
-		
-		mockMvc.perform(MockMvcRequestBuilders.post(uri).content(json).contentType(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().is(201));
-		
-	}
+//	@Test
+//	void deveCadastrarUsuario() throws Exception {
+//		URI uri = new URI("/usuario");
+//		String json = "{\"nome\": \"Igor de Almeida Lima\", \"email\": \"almeidalima.igor@gmail.com\", \"senha\": \"123456\"}";
+//		
+//		mockMvc.perform(MockMvcRequestBuilders.post(uri).content(json).contentType(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().is(201));
+//		
+//	}
 
 }

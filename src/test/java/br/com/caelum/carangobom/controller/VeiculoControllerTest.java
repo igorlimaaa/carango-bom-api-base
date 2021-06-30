@@ -39,16 +39,6 @@ class VeiculoControllerTest {
 
     }
 
-//    private VeiculoForm createVeiculoForm(Long ano ,String modelo, Double preco, boolean isVendido) {
-//        VeiculoForm veiculoNovo = new VeiculoForm();
-//        veiculoNovo.getAno().intValue();
-//        veiculoNovo.setModelo(modelo);
-//        veiculoNovo.getPreco().intValue();
-//        veiculoNovo.setIsVendido(isVendido);
-//        return veiculoNovo;
-//    }
-    
-    
     @Test
     void deveRetornarListaQuandoHouverResultadosVeiculos() {
     	
@@ -63,14 +53,6 @@ class VeiculoControllerTest {
     }
     
 
-    
-//    @Test
-//    void deveResponderCreatedVeiculo() {
-//    	VeiculoForm veiculoNova = createVeiculoForm(2020, "Corolla", 77.000, true, 1L);
-//        ResponseEntity<VeiculoForm> resposta = veiculoController.criarVeiculo(veiculoNova);
-//        assertEquals(HttpStatus.CREATED, resposta.getStatusCode());
-//    }
-    
     @Test
     void deveRetornarVeiculoPeloId() {
     	Integer id = 1;
@@ -90,22 +72,7 @@ class VeiculoControllerTest {
         ResponseEntity<VeiculoForm> resposta = veiculoController.id(id);
         assertEquals(HttpStatus.NOT_FOUND, resposta.getStatusCode());
     }
-    
-//    @Test
-//    void deveAlterarNomeQuandoMarcaExistir() {
-//    	MarcaForm nova = createVeiculoForm("NOVA Audi");
-//        ResponseEntity<MarcaForm> resposta = marcaController.altera(1L, nova);
-//        assertEquals(HttpStatus.OK, resposta.getStatusCode());
-//        MarcaForm marcaAlterada = resposta.getBody();
-//        assertEquals("NOVA Audi", marcaAlterada.getNome());
-//    }
 
-//    @Test
-//    void naoDeveAlterarMarcaInexistente() {
-//    	MarcaForm nova = createVeiculoForm("NOVA Toyota");
-//        ResponseEntity<MarcaForm> resposta = marcaController.altera(10L, nova);
-//        assertEquals(HttpStatus.NOT_FOUND, resposta.getStatusCode());
-//    }
 
     @Test
     void deveDeletarMarcaExistente() {
@@ -119,7 +86,4 @@ class VeiculoControllerTest {
         ResponseEntity<VeiculoForm> resposta = veiculoController.deleta(10L);
         assertEquals(HttpStatus.NOT_FOUND, resposta.getStatusCode());
     }
-    
-    
-    
 }
