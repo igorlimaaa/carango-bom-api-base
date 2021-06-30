@@ -29,5 +29,13 @@ public class AuthControllerTest {
 		
 		mockMvc.perform(MockMvcRequestBuilders.post(uri).content(json).contentType(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().is(400));
 	}
+	
+	@Test
+	public void deveriaRetornar200Sucesso() throws Exception{
+		URI uri = new URI("/auth");
+		String json = "{\"email\": \"almeidalima.igor@gmail.com\", \"senha\": \"123456\"}";
+		
+		mockMvc.perform(MockMvcRequestBuilders.post(uri).content(json).contentType(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().is(200));
+	}
 
 }
