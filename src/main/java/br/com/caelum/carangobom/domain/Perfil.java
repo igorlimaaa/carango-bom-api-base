@@ -16,13 +16,13 @@ public class Perfil implements GrantedAuthority {
 	private static final long serialVersionUID = 1L;
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id_perfil;
+	private Long id;
 	
-	private String ds_nome;
+	private String nome;
 
 	@Override
 	public String getAuthority() {
-		return ds_nome;
+		return nome;
 	}
 	
 }
