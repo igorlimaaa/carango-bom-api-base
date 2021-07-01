@@ -49,11 +49,19 @@ class UsuarioControllerTest {
 	}
 	
 	@Test
-	public void deveDeletarUsuario() throws Exception {
+	public void deveDeletarUsuarioComSucesso() throws Exception {
 		Integer idUsuario = 1;
 		ResponseEntity<UsuarioForm> usuarioDel = usuarioController.deleta(idUsuario.longValue());
 		assertEquals(HttpStatus.OK, usuarioDel.getStatusCode());
 		assertEquals(idUsuario, usuarioDel.getBody().getId().intValue());
+		
+	}
+	
+	@Test
+	public void deletarUsuarioInexistente() throws Exception {
+		Integer idUsuario = 1000;
+		ResponseEntity<UsuarioForm> usuarioDel = usuarioController.deleta(idUsuario.longValue());
+		assertEquals(HttpStatus.NOT_FOUND, usuarioDel.getStatusCode());
 		
 	}
 
