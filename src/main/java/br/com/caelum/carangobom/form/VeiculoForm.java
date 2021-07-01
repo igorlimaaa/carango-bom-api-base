@@ -30,26 +30,28 @@ public class VeiculoForm {
 		
 		public List<VeiculoForm> convertDomainToDto(List<Veiculo> veiculo) {
 			List<VeiculoForm> listaType = new ArrayList<>();
-			veiculo.forEach(veiculoDomain -> {
-				VeiculoForm veiculoType = new VeiculoForm();
-				veiculoType.setId(veiculoDomain.getId());
-				veiculoType.setAno(veiculoDomain.getAno());
-				veiculoType.setModelo(veiculoDomain.getModelo());
-				veiculoType.setPreco(veiculoDomain.getPreco());
-				veiculoType.setIsVendido(veiculoDomain.getIsVendido());
-				
-				MarcaForm marcaDomain = new MarcaForm();
-				marcaDomain.setId(veiculoDomain.getMarca().getId());
-				marcaDomain.setNome(veiculoDomain.getMarca().getNome());
-				veiculoType.setMarca(marcaDomain);
 			
-				listaType.add(veiculoType);
-				
-			});
+			veiculo.forEach(veiculoDomain -> listaType.add(convertDomainToType(veiculoDomain)));
 			
 			return listaType;
 		}
 		
+		public VeiculoForm convertDomainToType(Veiculo veiculoDomain) {
+			VeiculoForm veiculoType = new VeiculoForm();
+			veiculoType.setId(veiculoDomain.getId());
+			veiculoType.setAno(veiculoDomain.getAno());
+			veiculoType.setModelo(veiculoDomain.getModelo());
+			veiculoType.setPreco(veiculoDomain.getPreco());
+			veiculoType.setIsVendido(veiculoDomain.getIsVendido());
+			
+			MarcaForm marcaDomain = new MarcaForm();
+			marcaDomain.setId(veiculoDomain.getMarca().getId());
+			marcaDomain.setNome(veiculoDomain.getMarca().getNome());
+			veiculoType.setMarca(marcaDomain);
+			
+			return veiculoType;
+		}
+
 		public Veiculo convertTypeToDomain(VeiculoForm veiculoType) {
 			Veiculo veiculoDomain = new Veiculo();
 			veiculoDomain.setId(veiculoType.getId());
@@ -65,20 +67,4 @@ public class VeiculoForm {
 			return veiculoDomain;
 		}
 		
-		public VeiculoForm convertDomainToType(Veiculo veiculoDomain) {
-			VeiculoForm veiculoType = new VeiculoForm();
-			veiculoType.setId(veiculoDomain.getId());
-			veiculoType.setAno(veiculoDomain.getAno());
-			veiculoType.setModelo(veiculoDomain.getModelo());
-			veiculoType.setPreco(veiculoDomain.getPreco());
-			veiculoType.setIsVendido(veiculoDomain.getIsVendido());
-			
-			MarcaForm marcaDomain = new MarcaForm();
-			marcaDomain.setId(veiculoDomain.getMarca().getId());
-			marcaDomain.setNome(veiculoDomain.getMarca().getNome());
-			veiculoType.setMarca(marcaDomain);
-		
-			return veiculoType;
-		}
-
 }
