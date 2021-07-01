@@ -114,7 +114,7 @@ class VeiculoControllerTest {
     
     @Test
     void deveRetornarTodosVeiculoVendido() {
-        ResponseEntity<List<VeiculoForm>> resposta = veiculoController.vendido();
+        ResponseEntity<List<VeiculoForm>> resposta = veiculoController.vedido();
         assertEquals(HttpStatus.OK, resposta.getStatusCode());
     }
     
