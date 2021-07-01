@@ -1,10 +1,9 @@
 package br.com.caelum.carangobom.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.MockitoAnnotations.openMocks;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -35,10 +34,6 @@ class MarcaControllerTest {
     @BeforeEach
     public void configuraMock() {
         openMocks(this);
-
-
-//        marcaController = new MarcaController();
-     //   uriBuilder = UriComponentsBuilder.fromUriString("http://localhost:8080");
     }
     
     private MarcaForm createMarcaForm(String nome) {
@@ -49,17 +44,9 @@ class MarcaControllerTest {
 
     @Test
     void deveRetornarListaQuandoHouverResultados() {
-    	
-    	List<Marca> marcas = new ArrayList<Marca>();
-    	marcas.add(new Marca(1L, "Audi"));
-    	marcas.add(new Marca(2L, "BMW"));
-    	marcas.add(new Marca(3L, "Fiat"));
-
-        when(marcaRepository.findByIdOrderNome())
-            .thenReturn(marcas);
-
-        List<Marca> resultado = marcaRepository.findByIdOrderNome();
-        assertEquals(marcas, resultado);
+    	ResponseEntity<List<MarcaForm>> listMarcas = marcaController.lista();
+    	boolean result = listMarcas.getBody() != null && !listMarcas.getBody().isEmpty() ? true : false;
+    	assertTrue(result);
     }
 
     @Test
