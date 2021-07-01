@@ -16,10 +16,10 @@ import br.com.caelum.carangobom.domain.Usuario;
 @ComponentScan("br.com.caelum.carangobom.repository")
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 	
-	@Query(value = "SELECT m.* FROM tb_usuario m WHERE ds_email = :email", nativeQuery = true)
+	@Query(value = "SELECT m.* FROM tb_usuario m WHERE email = :email", nativeQuery = true)
 	Optional<Usuario> findByEmail(String email);
 	
-	@Query(value = "SELECT m.* FROM tb_usuario m ORDER BY ds_nome", nativeQuery = true)
+	@Query(value = "SELECT m.* FROM tb_usuario m ORDER BY nome", nativeQuery = true)
 	List<Usuario> findByIdOrderNome();
 	
 }

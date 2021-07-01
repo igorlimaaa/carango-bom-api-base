@@ -15,7 +15,7 @@ import br.com.caelum.carangobom.domain.Marca;
 @ComponentScan("br.com.caelum.carangobom.repository")
 public interface MarcaRepository extends JpaRepository<Marca, Long>{
 	
-	@Query(value = "SELECT m.* FROM tb_marca m ORDER BY ds_nome", nativeQuery = true)
+	@Query(value = "SELECT m.* FROM tb_marca m ORDER BY nome", nativeQuery = true)
 	List<Marca> findByIdOrderNome();
 	
 }

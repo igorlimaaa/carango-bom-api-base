@@ -29,7 +29,7 @@ public class TokenService {
 		
 		return Jwts.builder()
 				.setIssuer("API Carango Bom")
-				.setSubject(login.getId_usuario().toString())
+				.setSubject(login.getId().toString())
 				.setIssuedAt(now)
 				.setExpiration(dateEx)
 				.signWith(SignatureAlgorithm.HS256, secret)
