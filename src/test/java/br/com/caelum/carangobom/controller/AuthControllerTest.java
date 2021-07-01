@@ -20,7 +20,7 @@ import br.com.caelum.carangobom.form.TokenForm;
 @AutoConfigureMockMvc
 //@ContextConfiguration(classes = CarangoBomApiApplication.class)
 @ActiveProfiles("test")
-public class AuthControllerTest {
+class AuthControllerTest {
 	
 	
 	@Autowired
@@ -30,7 +30,7 @@ public class AuthControllerTest {
 	private AuthController authController;
 
 	@Test
-	private void deveriaRetornar400CasoDadosDeAutenticacaoEstejamErrados() throws Exception {
+	void deveriaRetornar400CasoDadosDeAutenticacaoEstejamErrados() throws Exception {
 		URI uri = new URI("/auth");
 		String json = "{\"email\": \"invalid@gmail.com\", \"senha\": \"123456\"}";
 		
@@ -38,7 +38,7 @@ public class AuthControllerTest {
 	}
 	
 	@Test
-	private void deveriaRetornar200Sucesso() throws Exception{
+	void deveriaRetornar200Sucesso() throws Exception{
 		URI uri = new URI("/auth");
 		String json = "{\"email\": \"almeidalima.igor@gmail.com\", \"senha\": \"123456\"}";
 		

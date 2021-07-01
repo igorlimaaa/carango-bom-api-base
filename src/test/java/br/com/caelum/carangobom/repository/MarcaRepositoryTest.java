@@ -15,13 +15,13 @@ import br.com.caelum.carangobom.domain.Marca;
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles("test")
-public class MarcaRepositoryTest {
+class MarcaRepositoryTest {
 	
 	@Autowired
 	private MarcaRepository marcaRepository;
 	
 	@Test
-	private void deveRetornarListaMarcas() {
+	void deveRetornarListaMarcas() {
 		List<Marca> listMarca = marcaRepository.findByIdOrderNome();
 		boolean result = listMarca != null && !listMarca.isEmpty() ? true : false;
 		assertTrue(result);
