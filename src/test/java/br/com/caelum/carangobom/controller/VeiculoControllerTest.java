@@ -1,15 +1,13 @@
 package br.com.caelum.carangobom.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.MockitoAnnotations.openMocks;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -25,12 +23,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.google.common.net.HttpHeaders;
 
-import br.com.caelum.carangobom.domain.Marca;
-import br.com.caelum.carangobom.domain.Veiculo;
-import br.com.caelum.carangobom.form.LoginForm;
-import br.com.caelum.carangobom.form.TokenForm;
 import br.com.caelum.carangobom.form.VeiculoForm;
-import br.com.caelum.carangobom.repository.VeiculoRepository;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -41,15 +34,8 @@ class VeiculoControllerTest {
 	@Autowired
     private VeiculoController veiculoController;
 	
-	@Autowired
-	private AuthController authController;
-	
-	@Autowired
-	private MockMvc mockMvc;
-
-    @Mock
-    private VeiculoRepository veiculoRepository;
-    
+	@Autowired	
+	private MockMvc mockMvc;    
     
     @BeforeEach
     public void configuraMock() {
@@ -57,29 +43,17 @@ class VeiculoControllerTest {
 
     }
     
-    public String getTokenFromUser() {
-		LoginForm login = new LoginForm();
-		login.setEmail("almeidalima.igor@gmail.com");
-		login.setSenha("123456");
-		
-		ResponseEntity<TokenForm> token = authController.authentication(login);
-		
-		return token.getBody().getToken();
-	}
-    
-    
+    private final static String token = "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgQ2FyYW5nbyBCb20iLCJzdWIiOiIzIiwiaWF0IjoxNjI1MTY3ODUyLCJleHAiOjE2Mjc3NTk4NTJ9.T1rCYcSeK0Mcb0_QhpJ5Ts19F5VXWo-Y3Gbih15m7L8";
+        
     // Lista Veiculos Se Existir
     @Test
     void deveRetornarListaQuandoHouverResultadosVeiculos() {
     	
-    	List<Veiculo> veiculos = new ArrayList<Veiculo>();
-    	veiculos.add(new Veiculo());
-
-        when(veiculoRepository.findByIdOrderModeloVeiculo())
-            .thenReturn(veiculos);
-
-        List<Veiculo> resultado = veiculoRepository.findByIdOrderModeloVeiculo();
-        assertEquals(veiculos, resultado);
+    	ResponseEntity<List<VeiculoForm>> listVeiculo = veiculoController.lista();
+    	List<VeiculoForm> body = listVeiculo.getBody();
+    	boolean result = body != null && !body.isEmpty() ? true : false;
+    	assertTrue(result);
+    	
     }
     
     
@@ -87,14 +61,11 @@ class VeiculoControllerTest {
     @Test
     void deveRetornarListaQuandoHouverResultadosVeiculosVendidos() {
     	
-    	List<Veiculo> veiculos = new ArrayList<Veiculo>();
-    	veiculos.add(new Veiculo());
-
-        when(veiculoRepository.findByIdVedido())
-            .thenReturn(veiculos);
-
-        List<Veiculo> resultado = veiculoRepository.findByIdVedido();
-        assertEquals(veiculos, resultado);
+    	ResponseEntity<List<VeiculoForm>> listVeiculo = veiculoController.vedido();
+    	List<VeiculoForm> body = listVeiculo.getBody();
+    	boolean result = body != null && !body.isEmpty() ? true : false;
+    	assertTrue(result);
+    	
     }
     
     // Veiculos Por Id
@@ -142,30 +113,25 @@ class VeiculoControllerTest {
     @Test
     void deveResponderCreatedELocationQuandoCadastrarVeiculos() throws Exception {
     	
-    	String json = "{\"ano\": \"2020\", \"modelo\": \"Corolla\", \"preco\": \"73000\", \"isVendido\": \"true\", \"marca\": { \"id\": \"1\"} }";
-    	
-    	MockHttpServletRequestBuilder builder =
-                MockMvcRequestBuilders.post("/veiculo")
-                					  .header(HttpHeaders.AUTHORIZATION, "Bearer " + getTokenFromUser())
+    	String json = "{\"ano\": \"2020\", \"modelo\": \"Corolla\", \"preco\": \"73000\", \"isVendido\": \"true\", \"marca\": { \"id\": \"2\"} }";
+    	mockMvc.perform(MockMvcRequestBuilders.post("/veiculo")
+                					  .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                                       .contentType(MediaType.APPLICATION_JSON_VALUE)
                                       .accept(MediaType.APPLICATION_JSON)
                                       .characterEncoding("UTF-8")
-                                      .content(json);
-    			this.mockMvc.perform(builder)
-    		    .andExpect(MockMvcResultMatchers.status().is(201));
-
+                                      .content(json)).andExpect(MockMvcResultMatchers.status().is(201));
     }
     
     @Test
     void deveAlterarVeiculos() throws Exception {
     	
-    	String json = "{\"ano\": \"2020\", \"modelo\": \"Corolla\", \"preco\": \"73000\", \"isVendido\": \"true\", \"marca\": { \"id\": \"1\"} }";
+    	String json = "{\"ano\": \"2020\", \"modelo\": \"Corolla\", \"preco\": \"73000\", \"isVendido\": \"true\", \"marca\": { \"id\": \"2\"} }";
     	
     	Integer id = 2;
     	
-    	MockHttpServletRequestBuilder builder =
+		MockHttpServletRequestBuilder builder =
                 MockMvcRequestBuilders.put("/veiculo/" + id)
-                					  .header(HttpHeaders.AUTHORIZATION, "Bearer " + getTokenFromUser())
+                					  .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                                       .contentType(MediaType.APPLICATION_JSON_VALUE)
                                       .accept(MediaType.APPLICATION_JSON)
                                       .characterEncoding("UTF-8")

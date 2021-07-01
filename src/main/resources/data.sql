@@ -10,3 +10,4 @@ INSERT INTO VEICULO(ano, marca_id, modelo, preco, is_vendido) VALUES (2018, 2, '
 --Insert para Usuários
 INSERT INTO TB_USUARIO (ds_email, ds_nome, ds_senha) VALUES ('almeidalima.igor@gmail.com', 'Igor de Almeida Lima', '$2a$10$Gn03nA57itFW1RqrQCOZPON5b2L296pX0HBcVwpuHiyyD7qBpph/C');
 INSERT INTO TB_USUARIO (ds_email, ds_nome, ds_senha) VALUES ('sofia@gmail.com', 'Sofia Lima', '$2a$10$Gn03nA57itFW1RqrQCOZPON5b2L296pX0HBcVwpuHiyyD7qBpph/C');
+INSERT INTO TB_USUARIO (ds_email, ds_nome, ds_senha) VALUES ('furustreca@gmail.com', 'Furustreca Lima', '$2a$10$Gn03nA57itFW1RqrQCOZPON5b2L296pX0HBcVwpuHiyyD7qBpph/C');
