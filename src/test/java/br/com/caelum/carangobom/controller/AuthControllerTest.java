@@ -18,15 +18,16 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @ActiveProfiles("test")
 public class AuthControllerTest {
 	
+	
 	@Autowired
 	private MockMvc mockMvc;
 
-//	@Test
-//	public void deveriaRetornar400CasoDadosDeAutenticacaoEstejamErrados() throws Exception {
-//		URI uri = new URI("/auth");
-//		String json = "{\"email\": \"invalid@gmail.com\", \"senha\": \"123456\"}";
-//		
-//		mockMvc.perform(MockMvcRequestBuilders.post(uri).content(json).contentType(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().is(400));
-//	}
+	@Test
+	public void deveriaRetornar400CasoDadosDeAutenticacaoEstejamErrados() throws Exception {
+		URI uri = new URI("/auth");
+		String json = "{\"email\": \"invalid@gmail.com\", \"senha\": \"123456\"}";
+		
+		mockMvc.perform(MockMvcRequestBuilders.post(uri).content(json).contentType(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().is(400));
+	}
 
 }
