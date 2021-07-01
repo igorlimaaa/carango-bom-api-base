@@ -48,7 +48,7 @@ public class AuthControllerTest {
 	public String getTokenFromUser() {
 		LoginForm login = new LoginForm();
 		login.setEmail("almeidalima.igor@gmail.com");
-		login.setEmail("123456");
+		login.setSenha("123456");
 		
 		ResponseEntity<TokenForm> token = authController.authentication(login);
 		

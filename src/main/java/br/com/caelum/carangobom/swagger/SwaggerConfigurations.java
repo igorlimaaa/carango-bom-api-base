@@ -23,7 +23,7 @@ public class SwaggerConfigurations {
 				.paths(PathSelectors.ant("/**"))
 				.build()
 				.globalOperationParameters((Arrays.asList(new ParameterBuilder()
-						.name("Autorization")
+						.name("authorization")
 						.description("Header para token JWT")
 						.modelRef(new ModelRef("string"))
 						.parameterType("header")

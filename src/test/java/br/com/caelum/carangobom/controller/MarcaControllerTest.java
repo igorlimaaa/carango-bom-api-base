@@ -80,7 +80,7 @@ class MarcaControllerTest {
     @Test
     void naoDeveAlterarMarcaInexistente() {
     	MarcaForm nova = createMarcaForm("NOVA Toyota");
-        ResponseEntity<MarcaForm> resposta = marcaController.altera(10L, nova);
+        ResponseEntity<MarcaForm> resposta = marcaController.altera(1000L, nova);
         assertEquals(HttpStatus.NOT_FOUND, resposta.getStatusCode());
     }
 
@@ -92,7 +92,7 @@ class MarcaControllerTest {
 
     @Test
     void naoDeveDeletarMarcaInexistente() {
-        ResponseEntity<Marca> resposta = marcaController.deleta(10L);
+        ResponseEntity<Marca> resposta = marcaController.deleta(1000L);
         assertEquals(HttpStatus.NOT_FOUND, resposta.getStatusCode());
     }
 
