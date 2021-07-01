@@ -7,8 +7,12 @@ import org.springframework.stereotype.Component;
 
 import br.com.caelum.carangobom.domain.Marca;
 import br.com.caelum.carangobom.domain.Veiculo;
+import lombok.Getter;
+import lombok.Setter;
 
 @Component
+@Getter
+@Setter
 public class VeiculoForm {
 	    
 	
@@ -20,61 +24,9 @@ public class VeiculoForm {
 	    
 	    private Double preco;
 	    
-	    private boolean isVendido; 
+	    private Boolean isVendido; 
 	    
-	    private MarcaForm marca;
-
-		
-	    public Long getId() {
-			return id;
-		}
-
-		public void setId(Long id) {
-			this.id = id;
-		}
-
-		public Long getAno() {
-			return ano;
-		}
-
-		public void setAno(Long ano) {
-			this.ano = ano;
-		}
-
-		public String getModelo() {
-			return modelo;
-		}
-
-		public void setModelo(String modelo) {
-			this.modelo = modelo;
-		}
-
-		
-		public Double getPreco() {
-			return preco;
-		}
-
-		public void setPreco(Double preco) {
-			this.preco = preco;
-		}
-		
-		
-		public boolean getIsVendido() {
-			return isVendido;
-		}
-
-		public void setIsVendido(boolean isVendido) {
-			this.isVendido = isVendido;
-		}
-		
-		public MarcaForm getMarca() {
-			return marca;
-		}
-
-		public void setMarca(MarcaForm marca) {
-			this.marca = marca;
-		}
-		
+	    private MarcaForm marca;		
 		
 		public List<VeiculoForm> convertDomainToDto(List<Veiculo> veiculo) {
 			List<VeiculoForm> listaType = new ArrayList<>();
@@ -86,10 +38,10 @@ public class VeiculoForm {
 				veiculoType.setPreco(veiculoDomain.getPreco());
 				veiculoType.setIsVendido(veiculoDomain.getIsVendido());
 				
-				MarcaForm marca = new MarcaForm();
-				marca.setId(veiculoDomain.getMarca().getId());
-				marca.setNome(veiculoDomain.getMarca().getNome());
-				veiculoType.setMarca(marca);
+				MarcaForm marcaDomain = new MarcaForm();
+				marcaDomain.setId(veiculoDomain.getMarca().getId());
+				marcaDomain.setNome(veiculoDomain.getMarca().getNome());
+				veiculoType.setMarca(marcaDomain);
 			
 				listaType.add(veiculoType);
 				
@@ -106,9 +58,9 @@ public class VeiculoForm {
 			veiculoDomain.setPreco(veiculoType.getPreco());
 			veiculoDomain.setIsVendido(veiculoType.getIsVendido());
 			
-			Marca marca = new Marca();
-			marca.setId(veiculoType.getMarca().getId());
-			veiculoDomain.setMarca(marca);
+			Marca marcaDomain = new Marca();
+			marcaDomain.setId(veiculoType.getMarca().getId());
+			veiculoDomain.setMarca(marcaDomain);
 			
 			return veiculoDomain;
 		}
@@ -121,10 +73,10 @@ public class VeiculoForm {
 			veiculoType.setPreco(veiculoDomain.getPreco());
 			veiculoType.setIsVendido(veiculoDomain.getIsVendido());
 			
-			MarcaForm marca = new MarcaForm();
-			marca.setId(veiculoDomain.getMarca().getId());
-			marca.setNome(veiculoDomain.getMarca().getNome());
-			veiculoType.setMarca(marca);
+			MarcaForm marcaDomain = new MarcaForm();
+			marcaDomain.setId(veiculoDomain.getMarca().getId());
+			marcaDomain.setNome(veiculoDomain.getMarca().getNome());
+			veiculoType.setMarca(marcaDomain);
 		
 			return veiculoType;
 		}
