@@ -141,6 +141,25 @@ class VeiculoControllerTest {
 
     }
     
+    @Test
+    void naoDeveAlterarVeiculoInexistente() throws Exception {
+    	
+    	String json = "{\"ano\": \"2020\", \"modelo\": \"Corolla\", \"preco\": \"73000\", \"isVendido\": \"true\", \"marca\": { \"id\": \"2\"} }";
+    	
+    	Integer id = 2000;
+    	
+		MockHttpServletRequestBuilder builder =
+                MockMvcRequestBuilders.put("/veiculo/" + id)
+                					  .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
+                                      .contentType(MediaType.APPLICATION_JSON_VALUE)
+                                      .accept(MediaType.APPLICATION_JSON)
+                                      .characterEncoding("UTF-8")
+                                      .content(json);
+    			this.mockMvc.perform(builder)
+    		    .andExpect(MockMvcResultMatchers.status().is(404));
+
+    }
+    
     
 
 }

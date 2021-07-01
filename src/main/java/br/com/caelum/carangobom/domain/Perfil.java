@@ -16,7 +16,7 @@ public class Perfil implements GrantedAuthority {
 	private static final long serialVersionUID = 1L;
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id_perfir;
+	private Long id_perfil;
 	
 	private String ds_nome;
 
