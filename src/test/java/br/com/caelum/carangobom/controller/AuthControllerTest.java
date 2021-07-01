@@ -30,7 +30,7 @@ public class AuthControllerTest {
 	private AuthController authController;
 
 	@Test
-	public void deveriaRetornar400CasoDadosDeAutenticacaoEstejamErrados() throws Exception {
+	private void deveriaRetornar400CasoDadosDeAutenticacaoEstejamErrados() throws Exception {
 		URI uri = new URI("/auth");
 		String json = "{\"email\": \"invalid@gmail.com\", \"senha\": \"123456\"}";
 		
@@ -38,7 +38,7 @@ public class AuthControllerTest {
 	}
 	
 	@Test
-	public void deveriaRetornar200Sucesso() throws Exception{
+	private void deveriaRetornar200Sucesso() throws Exception{
 		URI uri = new URI("/auth");
 		String json = "{\"email\": \"almeidalima.igor@gmail.com\", \"senha\": \"123456\"}";
 		

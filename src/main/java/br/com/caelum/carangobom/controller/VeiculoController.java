@@ -87,9 +87,9 @@ public class VeiculoController {
 	public ResponseEntity<VeiculoForm> deleta(@PathVariable Long id) {
     	VeiculoForm veiculo = veiculoService.removeVeiculo(id);
 		if (veiculo != null) {
-			return new ResponseEntity<VeiculoForm>(veiculo, null, HttpStatus.OK);
+			return new ResponseEntity<>(veiculo, null, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<VeiculoForm>(veiculo, null, HttpStatus.NOT_FOUND);			
+			return new ResponseEntity<>(veiculo, null, HttpStatus.NOT_FOUND);			
 		}
 
 	}

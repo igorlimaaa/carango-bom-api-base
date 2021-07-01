@@ -12,6 +12,5 @@ import br.com.caelum.carangobom.domain.Usuario;
 @ComponentScan("br.com.caelum.carangobom.repository")
 public interface AuthRepository extends JpaRepository<Usuario, Long>{
 	
-	//Optional<Usuario> findByEmail(String email);
 	
 }

@@ -70,14 +70,11 @@
 			<artifactId>spring-boot-admin-starter-client</artifactId>
 			<version>2.1.4</version>
 		</dependency>
-		<!-- <dependency> <groupId>mysql</groupId> <artifactId>mysql-connector-java</artifactId> 
-			<scope>runtime</scope> </dependency> -->
 
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 		</dependency>
-
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -148,20 +145,6 @@
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>3.1.0</version><!--$NO-MVN-MAN-VER$ -->
 			</plugin>
-			<!-- <plugin>
-				<groupId>org.sonarsource.scanner.maven</groupId>
-				<artifactId>sonar-maven-plugin</artifactId>
-				<version>3.7.0.1746</version>
-				<executions>
-					<execution>
-						<id>sonar</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>sonar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin> -->
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>

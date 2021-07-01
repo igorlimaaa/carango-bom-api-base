@@ -21,7 +21,7 @@ public class MarcaRepositoryTest {
 	private MarcaRepository marcaRepository;
 	
 	@Test
-	public void deveRetornarListaMarcas() {
+	private void deveRetornarListaMarcas() {
 		List<Marca> listMarca = marcaRepository.findByIdOrderNome();
 		boolean result = listMarca != null && !listMarca.isEmpty() ? true : false;
 		assertTrue(result);
