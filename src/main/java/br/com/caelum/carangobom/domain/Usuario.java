@@ -15,7 +15,12 @@ import javax.persistence.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
 @Table(name = "tb_usuario")
 public class Usuario implements UserDetails {
 
@@ -30,46 +35,6 @@ public class Usuario implements UserDetails {
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Perfil> perfis = new ArrayList<>();
 	
-	public Long getId() {
-		return id_usuario;
-	}
-
-	public void setId(Long id_usuario) {
-		this.id_usuario = id_usuario;
-	}
-
-	public String getNome() {
-		return ds_nome;
-	}
-
-	public void setNome(String ds_nome) {
-		this.ds_nome = ds_nome;
-	}
-
-	public String getEmail() {
-		return ds_email;
-	}
-
-	public void setEmail(String ds_email) {
-		this.ds_email = ds_email;
-	}
-
-	public String getSenha() {
-		return ds_senha;
-	}
-
-	public void setSenha(String ds_senha) {
-		this.ds_senha = ds_senha;
-	}
-
-	public List<Perfil> getPerfis() {
-		return perfis;
-	}
-
-	public void setPerfis(List<Perfil> perfis) {
-		this.perfis = perfis;
-	}
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
