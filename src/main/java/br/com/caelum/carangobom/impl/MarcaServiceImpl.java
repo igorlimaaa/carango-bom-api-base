@@ -10,8 +10,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import br.com.caelum.carangobom.domain.Marca;
+import br.com.caelum.carangobom.domain.Veiculo;
+import br.com.caelum.carangobom.form.DashboardForm;
 import br.com.caelum.carangobom.form.MarcaForm;
 import br.com.caelum.carangobom.repository.MarcaRepository;
+import br.com.caelum.carangobom.repository.VeiculoRepository;
 import br.com.caelum.carangobom.service.MarcaService;
 import br.com.caelum.carangobom.validacao.ErroDeParametroOutputDto;
 import br.com.caelum.carangobom.validacao.ListaDeErrosOutputDto;
@@ -22,6 +25,9 @@ public class MarcaServiceImpl implements MarcaService {
 
 	@Autowired
 	private MarcaRepository marcaRepository;
+
+	@Autowired
+	private VeiculoRepository veiculoRepository;
 	
 	@Autowired
 	private MarcaForm marcaForm;
@@ -90,6 +96,47 @@ public class MarcaServiceImpl implements MarcaService {
         l2.setErros(l);
         return l2;
 		
+	}
+
+
+	@Override
+	public List<DashboardForm> findDashboard() {
+		List<DashboardForm> listBoard = new ArrayList<>();
+		List<Marca> listMarcas = marcaRepository.findAll();
+		listMarcas.forEach(marca -> {
+			DashboardForm dashboard = new DashboardForm();
+			dashboard.setNomeMarca(marca.getNome());
+			listBoard.add(createMarcaDashboard(marca, dashboard));
+		});
+		return listBoard;
+	}
+	
+	private DashboardForm createMarcaDashboard(Marca marca, DashboardForm dashboard) {
+		Optional<List<Veiculo>> findVeiculosByMarcaId = veiculoRepository.findVeiculosByMarcaId(marca.getId().intValue());
+		if(findVeiculosByMarcaId.isPresent()) {
+			List<Veiculo> listVeiculo = findVeiculosByMarcaId.get();
+			dashboard.setQtdeVeiculos(extractQtdeVeiculoMarca(listVeiculo));
+			dashboard.setValorTotalVeiculos(extractValorVeiculosMarca(listVeiculo));
+		}
+		return dashboard;
+	}
+	
+	private Double extractValorVeiculosMarca(List<Veiculo> listVeiculo) {
+		Double valorSomado = 0.0;
+		if(!listVeiculo.isEmpty()) {
+			for(Veiculo veiculo : listVeiculo) {
+				valorSomado += veiculo.getPreco();
+			}
+			return valorSomado;				
+		}
+		return valorSomado;
+	}
+	
+	private Long extractQtdeVeiculoMarca(List<Veiculo> listVeiculo) {
+		if(!listVeiculo.isEmpty()) {
+			return (long) listVeiculo.size();
+		}
+		return 0L;
 	}
 }
 

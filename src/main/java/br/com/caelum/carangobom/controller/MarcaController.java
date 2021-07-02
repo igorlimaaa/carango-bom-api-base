@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.caelum.carangobom.domain.Marca;
+import br.com.caelum.carangobom.form.DashboardForm;
 import br.com.caelum.carangobom.form.MarcaForm;
 import br.com.caelum.carangobom.service.MarcaService;
 import br.com.caelum.carangobom.validacao.ListaDeErrosOutputDto;
@@ -87,10 +88,17 @@ public class MarcaController {
 		if (marca != null) {
 			return new ResponseEntity<>(marca, null, HttpStatus.OK);
 		}else {
-			return new ResponseEntity<>(marca, null, HttpStatus.NOT_FOUND);			
+			return ResponseEntity.notFound().build();			
 		}
 
 	}
+	
+    @GetMapping("/marcas/dashboard")
+    @ResponseBody
+    @Transactional
+    public ResponseEntity<List<DashboardForm>> dashBoard() {
+        return new ResponseEntity<>(marcaService.findDashboard(), null, HttpStatus.OK);
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody
