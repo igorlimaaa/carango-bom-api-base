@@ -77,6 +77,14 @@ class MarcaControllerTest {
         MarcaForm marcaAlterada = resposta.getBody();
         assertEquals("NOVA Audi", marcaAlterada.getNome());
     }
+    
+    @Test
+    void deveAlterarNomeQuandoMarcaExistirComNomeNull() {
+    	MarcaForm nova = createMarcaForm("NOVA Audi");
+    	nova.setNome(null);
+        ResponseEntity<MarcaForm> resposta = marcaController.altera(1L, nova);
+        assertEquals(HttpStatus.NOT_FOUND, resposta.getStatusCode());
+    }
 
     @Test
     void naoDeveAlterarMarcaInexistente() {
