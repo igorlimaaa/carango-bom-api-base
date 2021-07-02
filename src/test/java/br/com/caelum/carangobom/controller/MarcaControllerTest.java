@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 
 import br.com.caelum.carangobom.domain.Marca;
+import br.com.caelum.carangobom.form.DashboardForm;
 import br.com.caelum.carangobom.form.MarcaForm;
 import br.com.caelum.carangobom.repository.MarcaRepository;
 
@@ -76,6 +77,14 @@ class MarcaControllerTest {
         MarcaForm marcaAlterada = resposta.getBody();
         assertEquals("NOVA Audi", marcaAlterada.getNome());
     }
+    
+    @Test
+    void deveAlterarNomeQuandoMarcaExistirComNomeNull() {
+    	MarcaForm nova = createMarcaForm("NOVA Audi");
+    	nova.setNome(null);
+        ResponseEntity<MarcaForm> resposta = marcaController.altera(1L, nova);
+        assertEquals(HttpStatus.NOT_FOUND, resposta.getStatusCode());
+    }
 
     @Test
     void naoDeveAlterarMarcaInexistente() {
@@ -94,6 +103,13 @@ class MarcaControllerTest {
     void naoDeveDeletarMarcaInexistente() {
         ResponseEntity<Marca> resposta = marcaController.deleta(1000L);
         assertEquals(HttpStatus.NOT_FOUND, resposta.getStatusCode());
+    }
+    
+    @Test
+    void deveRetornarDashboard() {
+    	ResponseEntity<List<DashboardForm>> dashBoard = marcaController.dashBoard();
+    	boolean result = dashBoard.getBody() != null && !dashBoard.getBody().isEmpty() ? true : false;
+    	assertTrue(result);
     }
 
 }

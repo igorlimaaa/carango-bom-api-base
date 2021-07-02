@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import br.com.caelum.carangobom.domain.Marca;
+import br.com.caelum.carangobom.form.DashboardForm;
 import br.com.caelum.carangobom.form.MarcaForm;
 import br.com.caelum.carangobom.validacao.ListaDeErrosOutputDto;
 
@@ -21,6 +22,8 @@ public interface MarcaService {
     public Marca findByIdBrand(Long id);
 
     public List<MarcaForm> findAllByOrderByNomeBrand();
+    
+    public List<DashboardForm> findDashboard();
     
     public ListaDeErrosOutputDto validacao(MethodArgumentNotValidException excecao);
 
