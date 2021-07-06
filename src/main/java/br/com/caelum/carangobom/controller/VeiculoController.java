@@ -11,10 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.caelum.carangobom.form.VeiculoForm;
 import br.com.caelum.carangobom.service.VeiculoService;
-import br.com.caelum.carangobom.validacao.ListaDeErrosOutputDto;
 
 @Controller
 @CrossOrigin(origins = "http://localhost:3000")
@@ -93,11 +90,5 @@ public class VeiculoController {
 		}
 
 	}
-    
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseBody
-    public ListaDeErrosOutputDto validacao(MethodArgumentNotValidException excecao) {
-        return veiculoService.validacao(excecao);
-    }
 
 }

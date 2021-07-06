@@ -10,19 +10,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import br.com.caelum.carangobom.exception.UsuarioExistenteException;
 import br.com.caelum.carangobom.form.UsuarioForm;
 import br.com.caelum.carangobom.service.UsuarioService;
-import br.com.caelum.carangobom.validacao.ListaDeErrosOutputDto;
 
 @Controller
 @CrossOrigin(origins = "http://localhost:3000")
@@ -43,7 +41,7 @@ public class UsuarioController {
 	@PostMapping("/usuario")
     @ResponseBody
     @Transactional
-    public ResponseEntity<UsuarioForm> cadastraUsuario(@Valid @RequestBody UsuarioForm usuario) {
+    public ResponseEntity<UsuarioForm> cadastraUsuario(@Valid @RequestBody UsuarioForm usuario) throws UsuarioExistenteException {
     	return new ResponseEntity<>(usuarioService.saveUsuario(usuario), null, HttpStatus.CREATED);
     }
 	
@@ -60,10 +58,4 @@ public class UsuarioController {
 		}
 
 	}
-	
-	@ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseBody
-    public ListaDeErrosOutputDto validacao(MethodArgumentNotValidException excecao) {
-        return usuarioService.validacaoUsuario(excecao);
-    }
 }

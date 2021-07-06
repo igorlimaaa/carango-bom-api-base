@@ -12,10 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,10 +22,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.caelum.carangobom.domain.Marca;
+import br.com.caelum.carangobom.exception.MarcaAssociadaException;
 import br.com.caelum.carangobom.form.DashboardForm;
 import br.com.caelum.carangobom.form.MarcaForm;
 import br.com.caelum.carangobom.service.MarcaService;
-import br.com.caelum.carangobom.validacao.ListaDeErrosOutputDto;
 
 @Controller
 @CrossOrigin(origins = "http://localhost:3000")
@@ -83,7 +81,7 @@ public class MarcaController {
 	@Transactional
 	@Validated
 	@CacheEvict(value = "listaMarcas", allEntries = true)
-	public ResponseEntity<Marca> deleta(@PathVariable Long id) {
+	public ResponseEntity<Marca> deleta(@PathVariable Long id) throws MarcaAssociadaException  {
 		Marca marca = marcaService.removeBrand(id);
 		if (marca != null) {
 			return new ResponseEntity<>(marca, null, HttpStatus.OK);
@@ -98,12 +96,6 @@ public class MarcaController {
     @Transactional
     public ResponseEntity<List<DashboardForm>> dashBoard() {
         return new ResponseEntity<>(marcaService.findDashboard(), null, HttpStatus.OK);
-    }
-
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseBody
-    public ListaDeErrosOutputDto validacao(MethodArgumentNotValidException excecao) {
-        return marcaService.validacao(excecao);
     }
     
 }

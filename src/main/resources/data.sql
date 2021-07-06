@@ -1,7 +1,8 @@
 --Inserts para Marcas
 INSERT INTO TB_MARCA (nome) VALUES ('Audi');
-INSERT INTO TB_MARCA (nome) VALUES ('For');
+INSERT INTO TB_MARCA (nome) VALUES ('Ford');
 INSERT INTO TB_MARCA (nome) VALUES ('HyndaI');
+INSERT INTO TB_MARCA (nome) VALUES ('Ferrari');
 
 -- Insert para Veículos
 INSERT INTO VEICULO(ano, marca_id, modelo, preco, is_vendido) VALUES (2020, 3, 'I30', 73000, false);
