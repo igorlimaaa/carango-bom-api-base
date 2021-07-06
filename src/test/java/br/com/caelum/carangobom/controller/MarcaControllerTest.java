@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 
 import br.com.caelum.carangobom.domain.Marca;
+import br.com.caelum.carangobom.exception.MarcaAssociadaException;
 import br.com.caelum.carangobom.form.DashboardForm;
 import br.com.caelum.carangobom.form.MarcaForm;
 import br.com.caelum.carangobom.repository.MarcaRepository;
@@ -94,16 +95,22 @@ class MarcaControllerTest {
     }
 
     @Test
-    void deveDeletarMarcaExistente() {
+    void deveDeletarMarcaExistente() throws MarcaAssociadaException {
         ResponseEntity<Marca> resposta = marcaController.deleta(1L);
         assertEquals(HttpStatus.OK, resposta.getStatusCode());
     }
 
     @Test
-    void naoDeveDeletarMarcaInexistente() {
+    void naoDeveDeletarMarcaInexistente() throws MarcaAssociadaException {
         ResponseEntity<Marca> resposta = marcaController.deleta(1000L);
         assertEquals(HttpStatus.NOT_FOUND, resposta.getStatusCode());
     }
+    
+//    @Test
+//    void naoDeveDeletarMarcaAssociada() throws MarcaAssociadaException {
+//        ResponseEntity<Marca> resposta = marcaController.deleta(3L);
+//        assertEquals(HttpStatus.BAD_REQUEST, resposta.getStatusCode());
+//    }
     
     @Test
     void deveRetornarDashboard() {

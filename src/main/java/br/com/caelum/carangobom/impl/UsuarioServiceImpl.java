@@ -1,20 +1,17 @@
 package br.com.caelum.carangobom.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import br.com.caelum.carangobom.domain.Usuario;
+import br.com.caelum.carangobom.exception.UsuarioExistenteException;
 import br.com.caelum.carangobom.form.UsuarioForm;
 import br.com.caelum.carangobom.repository.UsuarioRepository;
 import br.com.caelum.carangobom.service.UsuarioService;
-import br.com.caelum.carangobom.validacao.ErroDeParametroOutputDto;
-import br.com.caelum.carangobom.validacao.ListaDeErrosOutputDto;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
@@ -26,7 +23,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 	private UsuarioForm usuarioForm;
 
 	@Override
-	public UsuarioForm saveUsuario(UsuarioForm usuarioType) {
+	public UsuarioForm saveUsuario(UsuarioForm usuarioType) throws UsuarioExistenteException{
+		Optional<Usuario> usuarioExistente = userRepository.findByEmail(usuarioType.getEmail());
+		if(usuarioExistente.isPresent()) {
+			throw new UsuarioExistenteException("E-mail já associado a um usuário");
+		}
 		usuarioType.setSenha(new BCryptPasswordEncoder().encode(usuarioType.getSenha()));
 		Usuario usuarioSave = userRepository.save(usuarioForm.convertDtoToDomain(usuarioType));
 		return usuarioForm.convertDomainToDto(usuarioSave);
@@ -48,21 +49,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 		} else {
 			return null;
 		}
-	}
-	
-	@Override
-	public ListaDeErrosOutputDto validacaoUsuario(MethodArgumentNotValidException excecao) {
-		List<ErroDeParametroOutputDto> l = new ArrayList<>();
-        excecao.getBindingResult().getFieldErrors().forEach(e -> {
-            ErroDeParametroOutputDto d = new ErroDeParametroOutputDto();
-            d.setParametro(e.getField());
-            d.setMensagem(e.getDefaultMessage());
-            l.add(d);
-        });
-        ListaDeErrosOutputDto l2 = new ListaDeErrosOutputDto();
-        l2.setErros(l);
-        return l2;
-		
 	}
 
 }

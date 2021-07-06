@@ -3,6 +3,8 @@ package br.com.caelum.carangobom.form;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotBlank;
+
 import org.springframework.stereotype.Component;
 
 import br.com.caelum.carangobom.domain.Marca;
@@ -15,6 +17,8 @@ import lombok.Setter;
 public class MarcaForm {
 
 	private Long id;
+	
+	@NotBlank
 	private String nome;
 
 	public List<MarcaForm> convertDomainToDto(List<Marca> marca) {
