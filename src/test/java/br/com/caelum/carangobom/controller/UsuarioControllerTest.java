@@ -34,11 +34,22 @@ class UsuarioControllerTest {
 
 	@Test
 	void deveCadastrarUsuario() throws Exception {
-		URI uri = new URI("/usuario");
-		String json = "{\"nome\": \"Priscilla Basto\", \"email\": \"priii@gmail.com\", \"senha\": \"123456\"}";
 		
-		mockMvc.perform(MockMvcRequestBuilders.post(uri).content(json).contentType(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().is(201));
+		UsuarioForm newUsuario = new UsuarioForm();
+		newUsuario.setName("Priscilla Basto");
+		newUsuario.setEmail("priii@gmail.com");
+		newUsuario.setSenha("123456");
 		
+		ResponseEntity<UsuarioForm> cadastroUsuario = usuarioController.cadastraUsuario(newUsuario);
+		boolean result = cadastroUsuario.getBody() != null && cadastroUsuario.getStatusCode() == HttpStatus.CREATED ? true : false;
+		
+		assertTrue(result);
+		
+//		URI uri = new URI("/usuario");
+//		String json = "{\"name\": \"Priscilla Basto\", \"email\": \"priii@gmail.com\", \"senha\": \"123456\"}";
+//		
+//		mockMvc.perform(MockMvcRequestBuilders.post(uri).content(json).contentType(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().is(201));
+//		
 	}
 	
 	@Test
