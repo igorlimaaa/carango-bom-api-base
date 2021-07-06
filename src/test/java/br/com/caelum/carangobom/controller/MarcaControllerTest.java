@@ -59,7 +59,7 @@ class MarcaControllerTest {
 
     @Test
     void deveRetornarNotFoundQuandoRecuperarMarcaComIdInexistente() {
-        ResponseEntity<Marca> resposta = marcaController.id(10L);
+        ResponseEntity<Marca> resposta = marcaController.id(1000L);
         assertEquals(HttpStatus.NOT_FOUND, resposta.getStatusCode());
     }
 
