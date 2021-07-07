@@ -34,7 +34,6 @@ public class UsuarioController {
     @ResponseBody
     @Transactional
     public List<UsuarioForm> lista() {
-		//TODO IAL: colocar paginacao para ordenar automaticamente.
         return usuarioService.findAllByOrderByNomeBrand();
     }
 	
