@@ -40,7 +40,7 @@ public class VeiculoServiceImpl implements VeiculoService {
 
 	@Override
 	public List<VeiculoForm> findAllByOrderByNomeVeiculo() {
-		List<Veiculo> listMarca = veiculoRepository.findByIdOrderModeloVeiculo();
+		List<Veiculo> listMarca = veiculoRepository.findAllByOrderByModeloAsc();
 		return veiculoForm.convertDomainToDto(listMarca);
 	}
 
@@ -68,7 +68,7 @@ public class VeiculoServiceImpl implements VeiculoService {
 
 	@Override
 	public List<VeiculoForm> findAllVendido() {
-		List<Veiculo> listMarcaVendido = veiculoRepository.findByIdVedido();
+		List<Veiculo> listMarcaVendido = veiculoRepository.findAllByIsVendido(false);
 		return veiculoForm.convertDomainToDto(listMarcaVendido);
 	}
 }

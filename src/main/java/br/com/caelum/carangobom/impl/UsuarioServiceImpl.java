@@ -35,7 +35,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public List<UsuarioForm> findAllByOrderByNomeBrand() {
-		List<Usuario> listUsuario = userRepository.findByIdOrderNome();
+		List<Usuario> listUsuario = userRepository.findAllByOrderByNomeAsc();
 		return usuarioForm.convertListDomainToDto(listUsuario);
 	}
 

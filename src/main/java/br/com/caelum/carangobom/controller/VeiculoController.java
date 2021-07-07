@@ -52,7 +52,7 @@ public class VeiculoController {
 	@GetMapping("/veiculo/vendido")
     @ResponseBody
     @Transactional
-    public ResponseEntity<List<VeiculoForm>> vedido(){
+    public ResponseEntity<List<VeiculoForm>> vendido(){
 		 return new ResponseEntity<>(veiculoService.findAllVendido(), null, HttpStatus.OK);
     }
 
