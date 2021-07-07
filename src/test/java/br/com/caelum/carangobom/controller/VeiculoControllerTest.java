@@ -13,16 +13,10 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import com.google.common.net.HttpHeaders;
-
+import br.com.caelum.carangobom.form.MarcaForm;
 import br.com.caelum.carangobom.form.VeiculoForm;
 
 @SpringBootTest
@@ -32,10 +26,7 @@ import br.com.caelum.carangobom.form.VeiculoForm;
 class VeiculoControllerTest {
 	
 	@Autowired
-    private VeiculoController veiculoController;
-	
-	@Autowired	
-	private MockMvc mockMvc;    
+    private VeiculoController veiculoController;  
     
     @BeforeEach
     public void configuraMock() {
@@ -43,7 +34,7 @@ class VeiculoControllerTest {
 
     }
     
-    private final static String token = "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgQ2FyYW5nbyBCb20iLCJzdWIiOiIzIiwiaWF0IjoxNjI1MTY3ODUyLCJleHAiOjE2Mjc3NTk4NTJ9.T1rCYcSeK0Mcb0_QhpJ5Ts19F5VXWo-Y3Gbih15m7L8";
+    //private final static String token = "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgQ2FyYW5nbyBCb20iLCJzdWIiOiIzIiwiaWF0IjoxNjI1MTY3ODUyLCJleHAiOjE2Mjc3NTk4NTJ9.T1rCYcSeK0Mcb0_QhpJ5Ts19F5VXWo-Y3Gbih15m7L8";
         
     // Lista Veiculos Se Existir
     @Test
@@ -111,55 +102,44 @@ class VeiculoControllerTest {
     }
     
     @Test
-    void deveResponderCreatedELocationQuandoCadastrarVeiculos() throws Exception {
+    void deveResponderCreatLocationQuandoCadastrarVeiculos() throws Exception {
     	
-    	String json = "{\"ano\": \"2020\", \"modelo\": \"Corolla\", \"preco\": \"73000\", \"isVendido\": \"true\", \"marca\": { \"id\": \"2\"} }";
-    	mockMvc.perform(MockMvcRequestBuilders.post("/veiculo")
-                					  .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
-                                      .contentType(MediaType.APPLICATION_JSON_VALUE)
-                                      .accept(MediaType.APPLICATION_JSON)
-                                      .characterEncoding("UTF-8")
-                                      .content(json)).andExpect(MockMvcResultMatchers.status().is(201));
+    	ResponseEntity<VeiculoForm> resposta = veiculoController.criarVeiculo(createVeiculoForm());
+    	
+    	assertEquals(HttpStatus.CREATED, resposta.getStatusCode());
     }
     
     @Test
     void deveAlterarVeiculos() throws Exception {
     	
-    	String json = "{\"ano\": \"2020\", \"modelo\": \"Corolla\", \"preco\": \"73000\", \"isVendido\": \"true\", \"marca\": { \"id\": \"2\"} }";
-    	
     	Integer id = 2;
+    	ResponseEntity<VeiculoForm> resposta = veiculoController.updateVeiculo(id.longValue(), createVeiculoForm());
     	
-		MockHttpServletRequestBuilder builder =
-                MockMvcRequestBuilders.put("/veiculo/" + id)
-                					  .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
-                                      .contentType(MediaType.APPLICATION_JSON_VALUE)
-                                      .accept(MediaType.APPLICATION_JSON)
-                                      .characterEncoding("UTF-8")
-                                      .content(json);
-    			this.mockMvc.perform(builder)
-    		    .andExpect(MockMvcResultMatchers.status().is(200));
+    	assertEquals(HttpStatus.OK, resposta.getStatusCode());
 
     }
     
     @Test
     void naoDeveAlterarVeiculoInexistente() throws Exception {
     	
-    	String json = "{\"ano\": \"2020\", \"modelo\": \"Corolla\", \"preco\": \"73000\", \"isVendido\": \"true\", \"marca\": { \"id\": \"2\"} }";
-    	
     	Integer id = 2000;
+    	ResponseEntity<VeiculoForm> resposta = veiculoController.updateVeiculo(id.longValue(), createVeiculoForm());
     	
-		MockHttpServletRequestBuilder builder =
-                MockMvcRequestBuilders.put("/veiculo/" + id)
-                					  .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
-                                      .contentType(MediaType.APPLICATION_JSON_VALUE)
-                                      .accept(MediaType.APPLICATION_JSON)
-                                      .characterEncoding("UTF-8")
-                                      .content(json);
-    			this.mockMvc.perform(builder)
-    		    .andExpect(MockMvcResultMatchers.status().is(404));
+    	assertEquals(HttpStatus.NOT_FOUND, resposta.getStatusCode());
 
     }
     
+    private VeiculoForm createVeiculoForm() {
+    	VeiculoForm veiculo = new VeiculoForm();
+    	veiculo.setAno(2020L);
+    	veiculo.setModelo("Corolla");
+    	veiculo.setPreco((double) 73000);
+    	veiculo.setIsVendido(true);
+    	MarcaForm marca = new MarcaForm();
+    	marca.setId(2L);
+    	veiculo.setMarca(marca);
+    	return veiculo;
+    }
     
 
 }
