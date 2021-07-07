@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import br.com.caelum.carangobom.domain.Usuario;
 
@@ -16,10 +15,8 @@ import br.com.caelum.carangobom.domain.Usuario;
 @ComponentScan("br.com.caelum.carangobom.repository")
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 	
-	@Query(value = "SELECT m.* FROM tb_usuario m WHERE email = :email", nativeQuery = true)
-	Optional<Usuario> findByEmail(String email);
+	public Optional<Usuario> findByEmail(String email);
 	
-	@Query(value = "SELECT m.* FROM tb_usuario m ORDER BY nome", nativeQuery = true)
-	List<Usuario> findByIdOrderNome();
+	public List<Usuario> findAllByOrderByNomeAsc();
 	
 }

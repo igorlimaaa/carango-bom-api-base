@@ -22,7 +22,7 @@ class MarcaRepositoryTest {
 	
 	@Test
 	void deveRetornarListaMarcas() {
-		List<Marca> listMarca = marcaRepository.findByIdOrderNome();
+		List<Marca> listMarca = marcaRepository.findAllByOrderByNomeAsc();
 		boolean result = listMarca != null && !listMarca.isEmpty() ? true : false;
 		assertTrue(result);
 	}

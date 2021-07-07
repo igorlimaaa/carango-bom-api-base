@@ -61,7 +61,7 @@ class VeiculoControllerTest {
     @Test
     void deveRetornarListaQuandoHouverResultadosVeiculosVendidos() {
     	
-    	ResponseEntity<List<VeiculoForm>> listVeiculo = veiculoController.vedido();
+    	ResponseEntity<List<VeiculoForm>> listVeiculo = veiculoController.vendido();
     	List<VeiculoForm> body = listVeiculo.getBody();
     	boolean result = body != null && !body.isEmpty() ? true : false;
     	assertTrue(result);
@@ -85,7 +85,7 @@ class VeiculoControllerTest {
     
     @Test
     void deveRetornarTodosVeiculoVendido() {
-        ResponseEntity<List<VeiculoForm>> resposta = veiculoController.vedido();
+        ResponseEntity<List<VeiculoForm>> resposta = veiculoController.vendido();
         assertEquals(HttpStatus.OK, resposta.getStatusCode());
     }
     

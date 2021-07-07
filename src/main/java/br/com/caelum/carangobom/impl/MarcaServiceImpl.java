@@ -67,7 +67,7 @@ public class MarcaServiceImpl implements MarcaService {
 
 	@Override
 	public List<MarcaForm> findAllByOrderByNomeBrand() {
-		List<Marca> listMarca = marcaRepository.findByIdOrderNome();
+		List<Marca> listMarca = marcaRepository.findAllByOrderByNomeAsc();
 		return marcaForm.convertDomainToDto(listMarca);
 	}
 	
