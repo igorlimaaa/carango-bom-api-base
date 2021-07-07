@@ -17,14 +17,14 @@ public class UsuarioForm {
 	private Long id;
 	private String name;
 	private String email;
-	private String senha;
+	private String password;
 
 	public Usuario convertDtoToDomain(UsuarioForm usuarioDto) {
 		Usuario usuarioDomain = new Usuario();
 		usuarioDomain.setId(usuarioDto.getId());
 		usuarioDomain.setEmail(usuarioDto.getEmail());
 		usuarioDomain.setNome(usuarioDto.getName());
-		usuarioDomain.setSenha(usuarioDto.getSenha());
+		usuarioDomain.setSenha(usuarioDto.getPassword());
 		return usuarioDomain;
 	}
 	
@@ -33,7 +33,7 @@ public class UsuarioForm {
 		usuarioDto.setId(usuarioDomain.getId());
 		usuarioDto.setEmail(usuarioDomain.getEmail());
 		usuarioDto.setName(usuarioDomain.getNome());
-		usuarioDto.setSenha(usuarioDomain.getSenha());
+		usuarioDto.setPassword(usuarioDomain.getSenha());
 		return usuarioDto;
 	}
 	

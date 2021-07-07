@@ -32,7 +32,7 @@ class UsuarioControllerTest {
 		UsuarioForm newUsuario = new UsuarioForm();
 		newUsuario.setName("Priscilla Basto");
 		newUsuario.setEmail("priii@gmail.com");
-		newUsuario.setSenha("123456");
+		newUsuario.setPassword("123456");
 		
 		ResponseEntity<UsuarioForm> cadastroUsuario = usuarioController.cadastraUsuario(newUsuario);
 		boolean result = cadastroUsuario.getBody() != null && cadastroUsuario.getStatusCode() == HttpStatus.CREATED ? true : false;

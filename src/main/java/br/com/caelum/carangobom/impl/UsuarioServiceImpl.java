@@ -28,7 +28,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		if(usuarioExistente.isPresent()) {
 			throw new UsuarioExistenteException("E-mail já associado a um usuário");
 		}
-		usuarioType.setSenha(new BCryptPasswordEncoder().encode(usuarioType.getSenha()));
+		usuarioType.setPassword(new BCryptPasswordEncoder().encode(usuarioType.getPassword()));
 		Usuario usuarioSave = userRepository.save(usuarioForm.convertDtoToDomain(usuarioType));
 		return usuarioForm.convertDomainToDto(usuarioSave);
 	}
