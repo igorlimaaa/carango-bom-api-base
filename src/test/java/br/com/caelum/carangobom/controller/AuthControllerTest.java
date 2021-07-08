@@ -27,7 +27,7 @@ class AuthControllerTest {
 		
 		LoginForm login = new LoginForm();
 		login.setEmail("invalid@gmail.com");
-		login.setSenha("123456");
+		login.setPassword("123456");
 		
 		ResponseEntity<TokenForm> token = authController.authentication(login);
 		
@@ -40,7 +40,7 @@ class AuthControllerTest {
 		
 		LoginForm login = new LoginForm();
 		login.setEmail("priii@gmail.com");
-		login.setSenha("123456");
+		login.setPassword("123456");
 		
 		ResponseEntity<TokenForm> token = authController.authentication(login);
 		
