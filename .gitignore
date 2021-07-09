@@ -28,6 +28,8 @@ bin/
 /.nb-gradle/
 build/
 !**/src/main/**/build/
+
+carango-api/
 !**/src/test/**/build/
 
 ### VS Code ###
