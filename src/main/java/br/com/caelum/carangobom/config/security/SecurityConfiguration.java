@@ -3,7 +3,6 @@ package br.com.caelum.carangobom.config.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -19,7 +18,6 @@ import br.com.caelum.carangobom.repository.UsuarioRepository;
 
 @EnableWebSecurity
 @Configuration
-@Order(2)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
@@ -49,7 +47,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.antMatchers(HttpMethod.GET, "/marcas").permitAll()
 			.antMatchers(HttpMethod.GET, "/marcas/*").permitAll()
 			.antMatchers(HttpMethod.POST, "/auth").permitAll()
-			//.antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
+			.antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
+			//.antMatchers("/actuator/**").hasAuthority("R_0")
 			.antMatchers(HttpMethod.GET, "/veiculo").permitAll()
 			
 			.anyRequest().authenticated()
